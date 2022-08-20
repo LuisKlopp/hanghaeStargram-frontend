@@ -1,6 +1,11 @@
 import React, {useState, useReducer} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
+// 회원가입 /api/members/signup
+// “username”: "iamuser",
+// “nickname”: “aaa”,
+// “password”: "1234"
+
 const reducer = (state, action) => {
     return {
       ...state,

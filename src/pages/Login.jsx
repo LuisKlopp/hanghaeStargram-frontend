@@ -3,7 +3,9 @@ import React, {useState, useReducer} from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
-
+// 로그인 API /api/members/login
+// “username”: "iamuser",
+// “password”: "1234"
 
 const reducer = (state, action) => {
   
