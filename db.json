@@ -3,17 +3,12 @@
     {
       "id": 1,
       "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "content": "typicode"
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 2,
+      "title": "컨텐츠 내용",
+      "content": "typicode"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

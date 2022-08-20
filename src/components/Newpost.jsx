@@ -4,7 +4,9 @@ import insta_file from '../images/insta_file.PNG'
 import { useRef } from 'react';
 
 export const Newpost = () => {
+
     const selectFile = useRef("");
+    
   return (
     <>
         <StWrapper>

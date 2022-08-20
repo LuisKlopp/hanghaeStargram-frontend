@@ -37,8 +37,8 @@ export default Detail;
 
 
 const Stdiv = styled.div`
-  width:70%;
-  height:50%;
+  width:1200px;
+  height:700px;
   top:0;
   display: flex;
   position: absolute;
