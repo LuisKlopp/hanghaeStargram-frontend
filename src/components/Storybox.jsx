@@ -94,6 +94,7 @@ const StProfile = styled.div`
   height:60%;
   border:2px solid black;
   border-radius: 50px;
+  cursor:pointer;
 `
 
 const StUsername = styled.span`

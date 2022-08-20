@@ -10,23 +10,33 @@ import Detail from "../components/Detail";
 
 const Main = () => {
 
+  const [modal, setModal] = useState(false)
 
 
   return (
     <>
     <GlobalStyle/>
-
       <StWrapper>
+    {
+      modal ? <Detail modal={modal} setModal={setModal}/> : null
+    }
 
         <StLeftdiv>
           <Storybox></Storybox>
-          <InstaCard></InstaCard>
+          <InstaCard modal={modal} setModal={setModal}></InstaCard>
+          <InstaCard modal={modal} setModal={setModal}></InstaCard>
+          <InstaCard modal={modal} setModal={setModal}></InstaCard>
         </StLeftdiv>
+
+
         <StRightdiv>
+          <StRightdiv_1>
           <MainProfile></MainProfile>
           <Members></Members>
+          </StRightdiv_1>
         </StRightdiv>
       </StWrapper>
+
 
       
     </>
@@ -49,6 +59,7 @@ const StWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position:relative;
 `;
 
 const StLeftdiv = styled.div`
@@ -60,8 +71,13 @@ const StLeftdiv = styled.div`
 
 const StRightdiv = styled.div`
   /* width:50%; */
-  display: flex;
-  flex-direction: column;
   margin-left:50px;
-  margin-top:-250px;
+  position: fixed;
+  top: 30%;
+  /* width: 100% */
+  right: 0;
 `;
+
+const StRightdiv_1 = styled.div`
+  height:100px;
+`

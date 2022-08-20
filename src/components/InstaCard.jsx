@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "./Profile";
 import Detail from "./Detail"
 
-const InstaCard = () => {
+const InstaCard = ({modal, setModal}) => {
 
   
 
@@ -18,7 +18,9 @@ const InstaCard = () => {
           <DotImg></DotImg>
         </CardHeader>
 
-        <CardImg></CardImg>
+        <CardImg onClick={() => {
+          setModal(modal = true)
+        }}></CardImg>
 
         <CardFooter>
 

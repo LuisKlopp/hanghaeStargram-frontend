@@ -1,13 +1,19 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 
 const Profile = () => {
 
+  const {pathname} = useLocation();
 
+
+  
   return (
+
+
     <>
-        <div style={{display:'flex', height:'50px', width:'350px'}}>
+        <div style={{display:'flex', height:'50px', width:'100%'}}>
         <StProfile>
         </StProfile>
         <StNameDiv>
@@ -28,6 +34,7 @@ const StProfile = styled.div`
   border:2px solid black;
   border-radius: 50px;
   margin-left:10px;
+  cursor:pointer;
 `
 
 const StNameDiv = styled.div`

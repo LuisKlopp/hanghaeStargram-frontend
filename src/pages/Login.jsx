@@ -1,10 +1,12 @@
 /*eslint-disable*/
 import React, {useState, useReducer} from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 
 
 const reducer = (state, action) => {
+  
   return {
     ...state,
     [action.name]: action.value,
@@ -13,12 +15,13 @@ const reducer = (state, action) => {
 
 
 const Login = () => {
-
+  
   const [state, setState] = useReducer(reducer, {
     userid: "",
     password: "",
   });
-
+  
+  const navigate = useNavigate()
   const { userid, password } = state;
 
   const onChange = (e) => {
@@ -26,7 +29,7 @@ const Login = () => {
   };
 
   console.log(state)
-  
+
 
   return (
     <>
@@ -36,9 +39,13 @@ const Login = () => {
           <StImgBox></StImgBox>
           <StInputBox name="userid" placeholder="ID" onChange={onChange}></StInputBox>
           <StInputBox name="password" placeholder="비밀번호" onChange={onChange}></StInputBox>
-          <StButton userid={userid} password={password}>로그인</StButton>
+          <StButton userid={userid} password={password} disabled={!userid.length && !password.length} onClick={() => {
+            console.log('dd')
+          }}>로그인</StButton>
         </StLoginBox>
-        <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}}>가입하기 버튼</span></StSignupBox>
+        <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
+          navigate('/signup')
+        }}>가입하기 버튼</span></StSignupBox>
       </StWrapper>
     </>
   );
@@ -117,5 +124,5 @@ const StButton = styled.button`
   font-weight:600;
   font-size:18px;
   background-color: ${({userid, password}) => userid !== '' && password !== '' ? '#0095f6' : '#ececec' };
-  cursor: ${({userid, password}) => userid !== '' && password !== '' ? 'pointer' : null}
+  cursor: ${({userid, password}) => userid !== '' && password !== '' ? 'pointer' : null }
 `

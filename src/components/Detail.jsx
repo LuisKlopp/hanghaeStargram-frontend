@@ -1,25 +1,80 @@
 /*eslint-disable*/
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Header from "./Header";
-import Storybox from "./Storybox";
-import InstaCard from "./InstaCard";
-import MainProfile from "./MainProfile";
-import Members from "./Members"
+import Profile from "./Profile";
 
-const Detail = () => {
+const Detail = ({modal, setModal}) => {
 
 
 
   return (
     <>
 
+    <Stdiv>
+      <LeftDiv></LeftDiv>
+      <RightDiv>
+        <RightProfileDiv style={{display:'flex'}}>
+        <Profile></Profile>
+        <X_button onClick={() => {
+          setModal(modal = false)
+        }}>X</X_button>
+        
+        </RightProfileDiv>
+        <RightProfileDiv style={{border:'none', height:'100px'}}>
+        <Profile></Profile>
+        <span style={{marginLeft:'50px', lineHeight:'100px'}}>컨텐츠 내용입니다 컨....<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
+        </RightProfileDiv>
+
+      </RightDiv>
+    </Stdiv>
+
     </>
   );
 };
 
+
 export default Detail;
 
 
+const Stdiv = styled.div`
+  width:70%;
+  height:50%;
+  top:0;
+  display: flex;
+  position: absolute;
+  background-color: black;
+  z-index:3;
+  border:2px solid #d7d7d7;
+  min-width:700px;
+  max-width:1300px;
+`
+const LeftDiv = styled.div`
+  width:70%;
+  height:100%;
+  background-image: url('https://imgscf.slidemembers.com/docs/1/1/44/gray_lightening_title_outline_purple_for_up_part_turqouise_for_down_part_-_free_ppt_sample_43313.jpg');
+  background-size: 100% 100%;
+  `
+const RightDiv = styled.div`
+  width:50%;
+  height:100%;
+  background-color: white;
+  display:flex;
+  align-items: center;
+  flex-direction:column;
+`
 
+const RightProfileDiv = styled.div`
+  width:80%;
+  margin-top:20px;
+  border-bottom:2px solid #d7d7d7;
+  height:70px;
+`
 
+const X_button = styled.button`
+  width:30px;
+  font-size:30px;
+  height:25px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+`
