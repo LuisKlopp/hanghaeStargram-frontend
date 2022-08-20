@@ -25,14 +25,10 @@ const Mypage = () => {
         </StHeader>
 
       <StList>
-        <StPost>
-        </StPost>
-        <StPost>
-        </StPost>        <StPost>
-        </StPost>        <StPost>
-        </StPost>        <StPost>
-        </StPost>        <StPost>
-        </StPost>
+        <StPost/>
+        <StPost/>
+        <StPost/>
+        <StPost/>
         </StList>
       </StWrapper>
     </>

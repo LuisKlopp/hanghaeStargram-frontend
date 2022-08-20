@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "./Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({modal, setModal}) => {
+const InstaCard = ({stuff}) => {
 
   
 
@@ -37,7 +37,7 @@ const InstaCard = ({modal, setModal}) => {
             <div style={{height:'5px'}}></div>
             <div style={{display:'flex', width:'300px'}}>
             <LikeSpan >
-              UserName : 컨텐츠 내용
+              {stuff.title}
             </LikeSpan>
             <LikeSpan style={{color:'grey', marginLeft:'10px', cursor:'pointer'}}>
               ...더보기

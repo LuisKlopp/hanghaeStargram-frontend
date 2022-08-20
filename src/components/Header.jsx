@@ -18,9 +18,7 @@ const Header = () => {
           <StIconDiv>
           <StIcon onClick={() => { navigate('/')}}/>
           <StIcon_1 />
-          <StIcon_2 />
-          <StIcon_3 />
-          <StIcon_4 />
+          <StIcon_2 onClick={() => {navigate('/newpost')}}/>
           <StIcon_5 onClick={() => {navigate('/mypage')}}/>
           </StIconDiv>
         </StWrapper_1>
