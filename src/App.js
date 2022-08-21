@@ -4,15 +4,17 @@ import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 import Login from './pages/Login'
 import Main from './pages/Main'
 import Signup from './pages/Signup';
-import { Newpost } from './components/Newpost';
+import { Newpost } from './pages/Newpost';
 import Header from './components/Header'
 import Detail from './components/Detail';
+import Practice from './pages/Practice';
 import Mypage from './pages/Mypage';
-
+import react, {useEffect} from 'react'
 
 function App() {
 
   const {pathname} = useLocation();
+
 
   return (
     <>
@@ -24,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/newpost" element={<Newpost />} />
         <Route path="/mypage" element={<Mypage/>}/>
+        <Route path="/practice" element={<Practice/>}/>
 
         </Routes>
     </> 

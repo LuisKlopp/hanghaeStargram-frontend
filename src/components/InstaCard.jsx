@@ -4,9 +4,8 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "./Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({stuff}) => {
+const InstaCard = ({stuff, modal, setModal}) => {
 
-  
 
 
   return (
