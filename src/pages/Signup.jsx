@@ -1,5 +1,7 @@
 import React, {useState, useReducer} from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { Routes, Route, Link, Redirect, useNavigate } from 'react-router-dom'
+
 
 // 회원가입 /api/members/signup
 // “username”: "iamuser",
@@ -14,6 +16,10 @@ const reducer = (state, action) => {
   }
 
 export const Signup = () => {
+
+
+  const navigate = useNavigate();
+
     const [state, setState] = useReducer(reducer, {
         userid: "",
         password: "",
@@ -38,7 +44,9 @@ export const Signup = () => {
                 <StInputBox name="password"  type="password" placeholder="비밀번호" onChange={onChange}/>
                 <StButton userid={userid} password={password} nickname={nickname} username={username}>가입</StButton>
             </StSignupBox>
-            <StLoginBox>계정이 있으신가요? <span style={{color:'#0095f6', marginLeft:'10px', fontWeight:'600', cursor:'pointer'}}>로그인</span></StLoginBox>
+            <StLoginBox>계정이 있으신가요? <span onClick={() => {
+              navigate('/login')
+            }} style={{color:'#0095f6', marginLeft:'10px', fontWeight:'600', cursor:'pointer'}}>로그인</span></StLoginBox>
         </StWrapper>
     </>
   )
