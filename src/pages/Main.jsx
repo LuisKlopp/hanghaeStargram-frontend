@@ -14,6 +14,7 @@ const Main = () => {
 
   
   const [ posts, setPosts ] = useState(null)
+  
   const [ modal, setModal ] = useState(false)
 
   const get_posts = async () => {
@@ -38,7 +39,7 @@ const Main = () => {
           <Storybox></Storybox>
           {
             posts?.map((stuff, i) => {
-             return  <InstaCard stuff={stuff} key={i}/>
+             return  <InstaCard stuff={stuff} key={i} modal={modal} setModal={setModal}/>
             })
           } 
         </StLeftdiv>
@@ -88,11 +89,9 @@ const StLeftdiv = styled.div`
 const StRightdiv = styled.div`
   /* width:50%; */
   margin-left:50px;
-  position: fixed;
-  top: 30%;
-  right: 0;
-`;
+  position:relative;
+  `;
 
 const StRightdiv_1 = styled.div`
-  height:100px;
+  top: 0;
 `

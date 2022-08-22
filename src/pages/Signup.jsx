@@ -1,7 +1,9 @@
 import React, {useState, useReducer} from "react";
-import { useNavigate } from 'react-router-dom';
 import styled, { createGlobalStyle } from "styled-components";
 import axios from 'axios'
+import { Routes, Route, Link, Redirect, useNavigate } from 'react-router-dom'
+
+
 
 // 회원가입 /api/members/signup
 // “username”: "iamuser",
@@ -57,6 +59,7 @@ export const Signup = () => {
     }
   }
 
+
   const handleNickname = (event) => {
     SetNickname(event.target.value)
     if (event.target.value < 2 || event.target.value > 10) {
@@ -93,6 +96,7 @@ export const Signup = () => {
     } else if (password === "") {
       return window.alert("패스워드를 입력 해주세요.")
     }
+
     
     const userInfo = {
       username,
@@ -131,9 +135,11 @@ export const Signup = () => {
                 {password.length > 0 && (<span className={`message ${isPassword ? 'success' : 'error'}`}>{passwordMessage}</span>)}
                 <StButton onClick={onSubmitHandler}>가입</StButton>
             </StSignupBox>
-            <StLoginBox>계정이 있으신가요? <span style={{color:'#0095f6', marginLeft:'10px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
+
+            <StLoginBox>계정이 있으신가요? <span onClick={() => {
               navigate('/login')
-            }}>로그인</span></StLoginBox>
+            }} style={{color:'#0095f6', marginLeft:'10px', fontWeight:'600', cursor:'pointer'}}>로그인</span></StLoginBox>
+
         </StWrapper>
     </>
   )
