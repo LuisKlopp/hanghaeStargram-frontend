@@ -8,7 +8,6 @@ import MainProfile from "../components/MainProfile";
 import Members from "../components/Members"
 import Detail from "../components/Detail";
 import axios from "axios"
-import Loader from "../api/Loader";
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {
