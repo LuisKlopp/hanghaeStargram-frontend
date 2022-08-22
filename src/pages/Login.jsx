@@ -2,36 +2,72 @@
 import React, {useState, useReducer} from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import axios from "axios";
+import { setAccessToken } from "../Cookie";
 
 // 로그인 API /api/members/login
 // “username”: "iamuser",
 // “password”: "1234"
 
-const reducer = (state, action) => {
+// const reducer = (state, action) => {
   
-  return {
-    ...state,
-    [action.name]: action.value,
-  }
-}
+//   return {
+//     ...state,
+//     [action.name]: action.value,
+//   }
+// }
 
 
 const Login = () => {
+  // const [state, setState] = useReducer(reducer, {
+  //   userid: "",
+  //   password: "",
+  // });
   
-  const [state, setState] = useReducer(reducer, {
-    userid: "",
-    password: "",
-  });
-  
-  const navigate = useNavigate()
-  const { userid, password } = state;
+  // const navigate = useNavigate()
+  // const { userid, password } = state;
 
-  const onChange = (e) => {
-    setState(e.target);
-  };
+  // const onChange = (e) => {
+  //   setState(e.target);
+  // };
+  // console.log(state)
 
-  console.log(state)
+  const navigate = useNavigate();
+  const [userid, SetUserid] = useState("");
+  const [password, SetPassword] = useState("");
 
+  const onClickLogin = async(event) => {
+    event.preventDefault();
+    if (userid === ""){
+      return window.alert("아이디 입력하세요.")
+    } else if( password === ""){
+      return window.alert("비밀번호를 입력하세요.")
+    }
+    try{
+      let res = await axios({
+        method: "POST",
+        // /api/members/login
+        url:"http://localhost:3001/posts",
+        data: {
+          userid,
+          password,
+        },
+      });
+
+      if (res.data.success === false){
+        alert("아이디 또는 비밀번호를 확인해주세요.")
+        navigate("/login");
+      } else{
+          setAccessToken(res.headers.authorization);
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `$(res.headers.authorization)`;
+          navigate("/");
+      }
+    } catch(err){
+      throw new Error(err);
+    }
+  }
 
   return (
     <>
@@ -39,11 +75,9 @@ const Login = () => {
       <StWrapper>
         <StLoginBox>
           <StImgBox></StImgBox>
-          <StInputBox name="userid" placeholder="ID" onChange={onChange}></StInputBox>
-          <StInputBox name="password" placeholder="비밀번호" onChange={onChange}></StInputBox>
-          <StButton userid={userid} password={password} disabled={!userid.length && !password.length} onClick={() => {
-            console.log('dd')
-          }}>로그인</StButton>
+          <StInputBox name="userid" placeholder="ID" onChange={(event) => {SetUserid(event.target.value)}}></StInputBox>
+          <StInputBox name="password" placeholder="비밀번호" onChange={(event) => {SetPassword(event.target.value)}}></StInputBox>
+          <StButton userid={userid} password={password} disabled={!userid.length && !password.length} onClick={onClickLogin}>로그인</StButton>
         </StLoginBox>
         <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
           navigate('/signup')
