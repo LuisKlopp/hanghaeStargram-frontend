@@ -5,6 +5,8 @@ import Profile from "../elements/Profile";
 
 const Detail = ({modal, setModal, stuff}) => {
 
+  
+
 
   return (
     <>
