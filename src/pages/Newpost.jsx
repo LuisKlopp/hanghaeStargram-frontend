@@ -246,6 +246,10 @@ const StImgPreview = styled.img`
   height:90%;
   position:absolute;
   bottom:0;
+  &:hover{
+    transform:scale(1.05, 1.05);  /* 가로2배 새로 1.5배 로 커짐 */
+    transition: transform 0.5s;  /* 커지는 시간 */
+  }
 `
 
 const StFilename = styled.div`

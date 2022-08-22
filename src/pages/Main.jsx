@@ -9,6 +9,7 @@ import Members from "../components/Members"
 import Detail from "../components/Detail";
 import axios from "axios"
 import Loader from "../api/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
 
@@ -17,7 +18,7 @@ const Main = () => {
   const [ posts, setPosts ] = useState(null)
   
   const [ modal, setModal ] = useState(false)
-
+  const navigate = useNavigate()
   const get_posts = async () => {
     const { data } = await axios.get("http://localhost:3001/posts");
     // console.log(data)
@@ -46,8 +47,8 @@ const Main = () => {
 
         <StRightdiv>
           <StRightdiv_1>
-          <MainProfile></MainProfile>
-          <Members></Members>
+          <MainProfile onClick={() => { navigate('/mypage')}}></MainProfile>
+          <Members ></Members>
           </StRightdiv_1>
         </StRightdiv>
       </StWrapper>

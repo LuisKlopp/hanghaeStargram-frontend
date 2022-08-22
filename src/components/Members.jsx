@@ -5,6 +5,7 @@ import Profile from "../elements/Profile"
 
 const Members = () => {
 
+  const [recommend, setRecommend] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1oTE1ouzTvmoVgcAlIYn2UH5yXD1ASPBA0w&usqp=CAU')
 
   return (
     <>
@@ -16,7 +17,7 @@ const Members = () => {
         </StDiv>
 
         
-          <Profile/>
+          <Profile recommend={recommend}/>
 
       </StWrapper>
     </>
