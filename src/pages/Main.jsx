@@ -8,6 +8,7 @@ import MainProfile from "../components/MainProfile";
 import Members from "../components/Members"
 import Detail from "../components/Detail";
 import axios from "axios"
+import Loader from "../api/Loader";
 
 const Main = () => {
 
@@ -31,9 +32,7 @@ const Main = () => {
     <>
     <GlobalStyle modal={modal}/>
       <StWrapper>
-    {
-      modal ? <Detail modal={modal} setModal={setModal}/> : null
-    }
+
 
         <StLeftdiv>
           <Storybox></Storybox>
@@ -74,9 +73,9 @@ const GlobalStyle = createGlobalStyle`
 const StWrapper = styled.div`
   width: 100%;
   display: flex;
+  background-color: #fafafa;
   justify-content: center;
   align-items: center;
-  position:relative;
 `;
 
 const StLeftdiv = styled.div`
@@ -93,5 +92,7 @@ const StRightdiv = styled.div`
   `;
 
 const StRightdiv_1 = styled.div`
+  position:fixed;
   top: 0;
+  margin-top:150px;
 `

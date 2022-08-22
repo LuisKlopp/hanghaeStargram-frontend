@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Profile from "./Profile"
+import Profile from "../elements/Profile"
 
 const Members = () => {
 

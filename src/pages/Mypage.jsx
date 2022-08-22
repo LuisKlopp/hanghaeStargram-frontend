@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Profile from "../components/Profile";
+import Profile from "../elements/Profile";
 
 
 const Mypage = () => {
