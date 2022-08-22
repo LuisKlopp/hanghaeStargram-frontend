@@ -1,17 +1,17 @@
 /*eslint-disable*/
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Profile from "./Profile";
+import Profile from "../elements/Profile";
 
-const Detail = ({modal, setModal}) => {
+const Detail = ({modal, setModal, stuff}) => {
 
-
+  console.log(stuff)
 
   return (
     <>
 
     <Stdiv>
-      <LeftDiv></LeftDiv>
+      <LeftDiv stuff={stuff}></LeftDiv>
       <RightDiv>
         <RightProfileDiv style={{display:'flex'}}>
         <Profile></Profile>
@@ -22,7 +22,7 @@ const Detail = ({modal, setModal}) => {
         </RightProfileDiv>
         <RightProfileDiv style={{border:'none', height:'100px'}}>
         <Profile></Profile>
-        <span style={{marginLeft:'50px', lineHeight:'100px'}}>컨텐츠 내용입니다 컨....<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
+        <span style={{marginLeft:'50px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
         </RightProfileDiv>
 
       </RightDiv>
@@ -37,21 +37,23 @@ export default Detail;
 
 
 const Stdiv = styled.div`
-  width:1200px;
-  height:700px;
-  top:0;
+  width:70%;
+  height:80%;
   display: flex;
-  position: absolute;
+  position: fixed;
   background-color: black;
   z-index:3;
-  border:2px solid #d7d7d7;
+  border:3px solid #000000;
   min-width:700px;
   max-width:1300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 const LeftDiv = styled.div`
   width:70%;
   height:100%;
-  background-image: url('https://imgscf.slidemembers.com/docs/1/1/44/gray_lightening_title_outline_purple_for_up_part_turqouise_for_down_part_-_free_ppt_sample_43313.jpg');
+  background-image: url(${props => props.stuff.url});
   background-size: 100% 100%;
   `
 const RightDiv = styled.div`
