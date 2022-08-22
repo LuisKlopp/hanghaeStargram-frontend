@@ -9,6 +9,12 @@
       "id": 2,
       "title": "컨텐츠 내용",
       "content": "typicode"
+    },
+    {
+      "username": "test",
+      "nickname": "1",
+      "password": "12314",
+      "id": 3
     }
   ]
 }
