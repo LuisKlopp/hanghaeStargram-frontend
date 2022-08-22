@@ -75,6 +75,7 @@ const StWrapper = styled.div`
   height: 100px;
   display: flex;
   justify-content: center;
+  background-color: #ffffff;
   align-items: center;
   border: 1px solid #d7d7d7;
   border-radius: 10px;
@@ -92,9 +93,11 @@ const StStory = styled.div`
 const StProfile = styled.div`
   width:85%;
   height:60%;
-  border:2px solid black;
   border-radius: 50px;
   cursor:pointer;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblGEH-slY1eScff-YLhFFEyTDPhju47lAcA&usqp=CAU');
+  background-size : cover;
+
 `
 
 const StUsername = styled.span`

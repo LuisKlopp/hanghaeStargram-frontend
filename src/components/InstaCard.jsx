@@ -1,25 +1,28 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import Profile from "./Profile";
+import Profile from "../elements/Profile";
 import Detail from "./Detail"
 
 const InstaCard = ({stuff, modal, setModal}) => {
 
-
+  console.log(stuff.url)
 
   return (
     <>
       <StWrapper>
+      {
+      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff}/> : null
+      }
 
         <CardHeader>
           <Profile></Profile>
           <DotImg></DotImg>
         </CardHeader>
 
-        <CardImg onClick={() => {
+        <CardImg  onClick={() => {
           setModal(modal = true)
-        }}></CardImg>
+        }} stuff={stuff}></CardImg>
 
         <CardFooter>
 
@@ -36,7 +39,7 @@ const InstaCard = ({stuff, modal, setModal}) => {
             <div style={{height:'5px'}}></div>
             <div style={{display:'flex', width:'300px'}}>
             <LikeSpan >
-              {stuff.title}
+              {stuff.content}
             </LikeSpan>
             <LikeSpan style={{color:'grey', marginLeft:'10px', cursor:'pointer'}}>
               ...더보기
@@ -66,9 +69,11 @@ const StWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #d7d7d7;
+  background-color: #ffffff;;
   border-radius: 10px;
   margin-top:30px;
   position:relative;
+  box-shadow: 0px 0px 1px 0px;
 `;
 
 const CardHeader = styled.div`
@@ -77,21 +82,18 @@ const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border:1px solid #d7d7d7;
   border-radius: 10px;
 `
 
 const CardImg = styled.div`
   width:100%;
   height:400px;
-  border:1px solid #d7d7d7;
-  background-image: url('https://mblogthumb-phinf.pstatic.net/MjAxOTEwMDNfMjEw/MDAxNTcwMDkwNDk1ODI3.WunRD2UbcBrhNy4NUa4Ano4mfxlWCTz7D2X2ddA0uLwg.ORDXfmDB9mQxoaL_YqP7j4_Wj3igbMh8TGeEL-OvNQgg.JPEG.ringding711/%EC%82%B4%EB%9D%BC.jpg?type=w800');
   background-size: 100% 100%;
+  background-image: url(${props => props.stuff.url});
 `
 const CardFooter = styled.div`
   width:100%;
   height:200px;
-  border:1px solid #d7d7d7;
   display:flex;
   flex-direction:column;
 `
@@ -148,3 +150,4 @@ const LikeSpan = styled.span`
   font-weight: 600;
   margin-left:20px;
 `
+

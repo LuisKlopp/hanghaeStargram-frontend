@@ -4,23 +4,21 @@ import insta_file from '../images/insta_file.PNG'
 import { useRef } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL, connectStorageEmulator } from "firebase/storage";
 import { storage } from "../api/firebase";
-import axios from "axios"
+
 import Loader from '../api/Loader';
-import {useNavigate} from "react-router-dom"
 
 
-const Newpost = () => {
-
-    const navigate = useNavigate()
+export const Newpost = () => {
 
     const selectFile = useRef("");
 
+    const [files, setFileList] = useState([]); // 파일 리스트
     const [file, setFile] = useState('');
     const [percent, setPercent] = useState(false);
     const [ imgurl, setImgUrl ] = useState('')
     const [loading, setLoading] = useState(null);
-
-    const [ content , setContent] = useState('')
+    const [photoURL, setPhotosURL] = useState([]); // 업로드 완료된 사진 링크들
+    const [progress, setProgress] = useState(0); // 업로드 진행상태
         
 
 
@@ -38,95 +36,73 @@ const Newpost = () => {
           
         };
       }
-
-      const onChange = (e) => {
-        setContent(e.target.value)
-        console.log(content)
-      }
-
-      const upLoad = () => {
-        const info = {
-            content,
-            url: imgurl
-        }
-
-        if (content !== '' && imgurl !== ''){
-        axios.post("http://localhost:3001/posts", info)
-        alert('업로드 완료!')
-        navigate('/')
-        } else {
-            alert('빈칸을 전부 채워주세요')
-        }
-      }
     
 
-    // const handleUpload = () => {
+    const handleUpload = () => {
  
-    //     const storageRef = ref(storage, `/files/${file.name}`);
+        const storageRef = ref(storage, `/files/${file.name}`);
  
-    //     // progress can be paused and resumed. It also exposes progress updates.
-    //     // Receives the storage reference and the file to upload.
-    //     const uploadTask = uploadBytesResumable(storageRef, file);
+        // progress can be paused and resumed. It also exposes progress updates.
+        // Receives the storage reference and the file to upload.
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-    //     uploadTask.on(
-    //         "state_changed",
-    //         (snapshot) => {
-    //             const percent = Math.round(
-    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //             );
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
 
-    //             setPercent(percent)
-    //             // update progress
-    //         },
-    //         (err) => console.log(err),
-    //         async () => {
-    //             // download url
-    //             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-    //                 console.log(url)
-    //             });
-    //         }
+                setPercent(percent)
+                // update progress
+            },
+            (err) => console.log(err),
+            async () => {
+                // download url
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log(url)
+                });
+            }
 
-    //         );
+            );
             
-    // };
+    };
 
-    // const handleImageUpload = async (fileList) => {
-    //     try {
-    //       // 업로드의 순서는 상관없으니 Promise.all로 이미지 업로드후 저장된 url 받아오기
-    //       const urls = await Promise.all(
-    //         fileList?.map((file) => {
-    //          // 스토리지 어디에 저장되게 할껀지 참조 위치를 지정. 아래와 같이 지정해줄시 images 폴더에 파일이름으로 저장
-    //           const storageRef = ref(storage, `images/${file.name}`);
+    const handleImageUpload = async (fileList) => {
+        try {
+          // 업로드의 순서는 상관없으니 Promise.all로 이미지 업로드후 저장된 url 받아오기
+          const urls = await Promise.all(
+            fileList?.map((file) => {
+             // 스토리지 어디에 저장되게 할껀지 참조 위치를 지정. 아래와 같이 지정해줄시 images 폴더에 파일이름으로 저장
+              const storageRef = ref(storage, `images/${file.name}`);
               
-    //           // File 또는 Blob 타입일 경우 uploadBytes 또는 uploadBytesResumable 메소드를 사용
-    //           // 만약 base64 또는 data_url 문자열로 업로드를 진행할 경우는 uploadString 사용
-    //           // 자세한 내용은 https://firebase.google.com/docs/storage/web/upload-files 공식문서 참고
-    //           const task = uploadBytesResumable(storageRef, file);
+              // File 또는 Blob 타입일 경우 uploadBytes 또는 uploadBytesResumable 메소드를 사용
+              // 만약 base64 또는 data_url 문자열로 업로드를 진행할 경우는 uploadString 사용
+              // 자세한 내용은 https://firebase.google.com/docs/storage/web/upload-files 공식문서 참고
+              const task = uploadBytesResumable(storageRef, file);
               
-    //           // 업로드 진행률을 모니터링, 업로드 진행률 퍼센트로 상태 지정
-    //           task.on("state_changed", (snapshot) => {
-    //             setProgress(
-    //               Math.round(
-    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //               )
-    //             );
-    //           });
-    //           return getDownloadURL(storageRef);
-    //         })
-    //       );
-    //       // 업로드된 이미지 링크 상태로 지정 (보통은 해당 링크를 데이터베이스(파이어스토어)에 저장)
-    //       setPhotosURL(urls);
-    //       alert("성공적으로 업로드 되었습니다");
-    //       console.log(photoURL)
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    //     // 초기화
-    // };
+              // 업로드 진행률을 모니터링, 업로드 진행률 퍼센트로 상태 지정
+              task.on("state_changed", (snapshot) => {
+                setProgress(
+                  Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                  )
+                );
+              });
+              return getDownloadURL(storageRef);
+            })
+          );
+          // 업로드된 이미지 링크 상태로 지정 (보통은 해당 링크를 데이터베이스(파이어스토어)에 저장)
+          setPhotosURL(urls);
+          alert("성공적으로 업로드 되었습니다");
+          console.log(photoURL)
+        } catch (err) {
+            console.error(err);
+        }
+        // 초기화
+    };
     
-
-
-
+    console.log(photoURL)
 
     if (loading) return <Loader type="spin" color="RGB 값" message={'로딩중입니다!'} />;
     
@@ -146,10 +122,10 @@ const Newpost = () => {
             </StpostBox_1>
             <StpostBox_2>
                 <StUpload>
-                    <UploadButton onClick={upLoad}>공유하기</UploadButton>
+                    <UploadButton>공유하기</UploadButton>
 
                 </StUpload>
-                <StInput onChange={onChange} placeholder='문구 입력 ...'>
+                <StInput placeholder='문구 입력 ...'>
                 </StInput>
 
             </StpostBox_2>
@@ -160,7 +136,6 @@ const Newpost = () => {
   )
 }
 
-export default Newpost
 
 const GlobalStyle = createGlobalStyle`
 	body {
@@ -289,7 +264,7 @@ const StUpload = styled.div`
 `
 
 const StInput =styled.textarea`
-    width:80%;
+    width:90%;
     border:none;
     height:300px;
     margin-top:10px;
@@ -299,7 +274,6 @@ const StInput =styled.textarea`
         outline: none;
     }
     resize:none;
-    font-weight:600;
 `
 const UploadButton = styled.button`
     background-color: #ffffff;
