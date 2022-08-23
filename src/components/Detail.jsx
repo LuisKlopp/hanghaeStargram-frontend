@@ -13,17 +13,23 @@ const Detail = ({modal, setModal, stuff}) => {
     console.log(comment)
   }
 
+  
+
+
+  console.log(stuff)
+
 
   return (
     <>
 
+    <StContainer>
     <Stdiv>
       <LeftDiv stuff={stuff}></LeftDiv>
       <RightDiv>
         <RightProfileDiv style={{display:'flex'}}>
         <Profile></Profile>
         <X_button onClick={() => {
-          setModal(modal = false)
+          setModal(modal => modal = false)
         }}>X</X_button>
         
         </RightProfileDiv>
@@ -38,6 +44,7 @@ const Detail = ({modal, setModal, stuff}) => {
 
       </RightDiv>
     </Stdiv>
+    </StContainer>
 
     </>
   );
@@ -45,6 +52,12 @@ const Detail = ({modal, setModal, stuff}) => {
 
 
 export default Detail;
+
+const StContainer = styled.div`
+  width:100%;
+  height:100%;
+  background-color: black;
+`
 
 
 const Stdiv = styled.div`
@@ -65,7 +78,7 @@ const Stdiv = styled.div`
 const LeftDiv = styled.div`
   width:70%;
   height:100%;
-  background-image: url(${props => props.stuff.url});
+  background-image: url(${props => props.stuff.imageUrl});
   background-size: 100% 100%;
   `
 const RightDiv = styled.div`

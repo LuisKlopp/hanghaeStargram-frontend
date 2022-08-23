@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL, connectStorageEmulator } fro
 import { storage } from "../api/firebase";
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
+import { getCookieToken } from '../Cookie';
 
 
 const Newpost = () => {
@@ -85,11 +86,15 @@ const Newpost = () => {
         
         const info = {
           content,
-          url,
+          file: url[0],
         }
         
         if (content !== '' && url !== ''){
-          await axios.post("http://localhost:3001/posts", info)
+          await axios.post("https://01192mg.shop/api/posts", info, {
+            headers: {
+              "Authorization" : getCookieToken(),
+          }
+          })
          navigate('/main')
          } else {
              alert('빈칸을 전부 채워주세요')
