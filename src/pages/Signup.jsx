@@ -50,7 +50,7 @@ export const Signup = () => {
 
   const handleUsername = (event) => {
     SetUsername(event.target.value);
-    if (event.target.value < 2 || event.target.value > 5) {
+    if (event.target.value.length < 2 || event.target.value.length > 5) {
       SetUsernameMessage('2~5 글자 미만으로 입력해주세요.');
       SetIsUsername(false);
     } else {
@@ -62,7 +62,7 @@ export const Signup = () => {
 
   const handleNickname = (event) => {
     SetNickname(event.target.value)
-    if (event.target.value < 2 || event.target.value > 10) {
+    if (event.target.value.length < 2 || event.target.value.length > 10) {
       SetNicknameMessage('2~10 글자 미만으로 입력해주세요.');
       SetIsNickname(false);
     } else {
@@ -88,7 +88,7 @@ export const Signup = () => {
 
   const onSubmitHandler  = async (event) => {
     event.preventDefault();
-    console.log("회원가입버튼 " ,username, nickname, password)
+
     if (username === ""){
       return window.alert("성명을 입력 해주세요.")
     }  else if (nickname === "") {
@@ -103,8 +103,8 @@ export const Signup = () => {
       nickname,
       password,
     }
-    console.log("회원가입유저정보 ",userInfo)
-    if (userInfo) {
+    
+    if (userInfo && isUsername && isNickname && isPassword ) {
       // /api/members/signup
       axios.post("http://localhost:3001/posts", userInfo)
         .then((res) => {
@@ -129,10 +129,10 @@ export const Signup = () => {
                 {/* <StInputBox name="email"  value={email} placeholder="휴대폰 또는 이메일 주소" onChange={handleEmail}/> */}
                 <StInputBox name="username"  value={username} placeholder="성명" onChange={handleUsername}/>
                 {username.length > 0 && <span className={`message ${isUsername ? 'success' : 'error'}`}>{usernameMessage}</span>}
-                <StInputBox name="nickname"  value={nickname} placeholder="사용자 이름" onChange={handleNickname}/>
+                <StInputBox name="nickname"  value={nickname} placeholder="사용자 닉네임" onChange={handleNickname}/>
                 {nickname.length > 0 && <span className={`message ${isNickname ? 'success' : 'error'}`}>{nicknameMessage}</span>}
                 <StInputBox name="password"  type="password" value={password} placeholder="비밀번호" onChange={handlePassword}/>
-                {password.length > 0 && (<span className={`message ${isPassword ? 'success' : 'error'}`}>{passwordMessage}</span>)}
+                {password.length > 0 && (<span style={{width:'60%'}} className={`message ${isPassword ? 'success' : 'error'}`}>{passwordMessage}</span>)}
                 <StButton onClick={onSubmitHandler}>가입</StButton>
             </StSignupBox>
 

@@ -36,8 +36,7 @@ const Login = () => {
   const [userid, SetUserid] = useState("");
   const [password, SetPassword] = useState("");
 
-  const onClickLogin = async(event) => {
-    event.preventDefault();
+  const onClickLogin = async() => {
     if (userid === ""){
       return window.alert("아이디 입력하세요.")
     } else if( password === ""){
@@ -77,7 +76,7 @@ const Login = () => {
           <StImgBox></StImgBox>
           <StInputBox name="userid" placeholder="ID" onChange={(event) => {SetUserid(event.target.value)}}></StInputBox>
           <StInputBox type="password" name="password" placeholder="비밀번호" onChange={(event) => {SetPassword(event.target.value)}}></StInputBox>
-          <StButton userid={userid} password={password} disabled={!userid.length && !password.length} onClick={onClickLogin}>로그인</StButton>
+          <StButton userid={userid} password={password} disabled={userid.length === 0 || password.length === 0} onClick={onClickLogin}>로그인</StButton>
         </StLoginBox>
         <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
           navigate('/signup')
