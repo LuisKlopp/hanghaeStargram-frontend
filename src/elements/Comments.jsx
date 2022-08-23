@@ -3,35 +3,26 @@ import React, {useEffect, useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 
-const Profile = ({recommend}) => {
+const Comments = () => {
 
-
-  const {pathname} = useLocation();
-
-
-  const profile_load = () => {
-    if ( recommend === undefined ) {
-      setLoading()
-    }
-  }
   
   return (
 
 
     <>
-        <div style={{display:'flex', height:'50px', width:'100%'}}>
+        <div style={{display:'flex', height:'50px', width:'100%', wordBreak:'break-all'}}>
         <StProfile>
         </StProfile>
         <StNameDiv>
-          <StUserName>ryu_verpool9</StUserName>
-          <StUserName style={{paddingRight:'60px', fontWeight:'500'}}>이름</StUserName>
+          <StUserName style={{fontWeight:'600'}}>ryu_verpool9</StUserName>
+          <StUserName style={{paddingRight:'60px'}}>댓글 테스트1</StUserName>
         </StNameDiv>
         </div>
     </>
   );
 };
 
-export default Profile;
+export default Comments;
 
 
 const StProfile = styled.div`
@@ -46,15 +37,14 @@ const StProfile = styled.div`
 `
 
 const StNameDiv = styled.div`
-  width:30%;
+  width:100%;
   height:70%;
   margin-left:5px;
   display:flex;
   /* text-align: center; */
-  flex-direction:column;
-
+  flex-direction: column;
 `
 
 const StUserName = styled.span`
-  font-weight: 600;
+  width:100%;
 `
