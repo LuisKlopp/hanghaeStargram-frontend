@@ -32,17 +32,17 @@ const Newpost = () => {
         setFileList((prevState) => [...prevState, image]);
       }
 
-        // const reader = new FileReader();
+        const reader = new FileReader();
     
-        // const file = selectFile.current.files[0];
-        // console.log(file)
-        // reader.readAsDataURL(file);
-        // reader.onloadend = () => {
-        //   setImgUrl(reader.result);
-        //   console.log(reader.result)
-        // };
+        const file = selectFile.current.files[0];
+        console.log(file)
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          setImgUrl(reader.result);
+          console.log(reader.result)
+        };
 
-        // console.log(files)
+        console.log(files)
 
       }
 
@@ -54,49 +54,47 @@ const Newpost = () => {
     // --------------------------------------------------------------------------------------------------------//
       // 업로드시 호출될 함수
       const handleImageUpload = async (fileList) => {
+
+
         try {
           setUploading(true);
-          // 업로드의 순서는 상관없으니 Promise.all로 이미지 업로드후 저장된 url 받아오기
           const urls = await Promise.all(
             fileList?.map(async (file) => {
-             // 스토리지 어디에 저장되게 할껀지 참조 위치를 지정. 아래와 같이 지정해줄시 images 폴더에 파일이름으로 저장
               const storageRef = ref(storage, `images/${file.name}`);
-
                await uploadBytesResumable(storageRef, file);
-              
-
               return getDownloadURL(storageRef);
             })
-          );
-          // 업로드된 이미지 링크 상태로 지정 (보통은 해당 링크를 데이터베이스(파이어스토어)에 저장)
-          setPhotosURL(urls);
+          ).then((res) => {
+            test_function(res)
+          }
+          ) 
           alert("성공적으로 업로드 되었습니다");
-        } catch (err) {
+        } 
+        
+        catch (err) {
           console.error(err);
         }
-        // 초기화
         setUploading(false);
-
-        
-        
-        test_function();
       };
+
+
+
       
-      console.log(photoURL)
       
-      const test_function = () => {
+      const test_function = async (url) => {
+        
         const info = {
           content,
-          url: photoURL
-      }
-
-      if (content !== '' && photoURL !== ''){
-      axios.post("http://localhost:3001/posts", info)
-      alert('업로드 완료!')
-      navigate('/')
-      } else {
-          alert('빈칸을 전부 채워주세요')
-      }
+          url,
+        }
+        
+        if (content !== '' && url !== ''){
+          await axios.post("http://localhost:3001/posts", info)
+         alert('업로드 완료!')
+         // navigate('/')
+         } else {
+             alert('빈칸을 전부 채워주세요')
+         }
 
       }
 
@@ -115,13 +113,16 @@ const Newpost = () => {
                     <StFilename> <span>새 게시물 만들기</span> </StFilename>  
                 </StLabel>
                 { imgurl ? <StImgPreview src={imgurl}></StImgPreview> : null }
-                <StImageBox ref={selectFile} onChange={onChangeImage} type="file" accept="/image/*"/>
+                <StImageBox ref={selectFile} onChange={onChangeImage } type="file" accept="/image/*"/>
                 {percent ? <StLabel2>{file.name}</StLabel2> : <StLabel2>사진을 선택하세요!</StLabel2> }
                 <STImageButton onClick={() => selectFile.current.click()}>컴퓨터에서 선택</STImageButton>
             </StpostBox_1>
             <StpostBox_2>
                 <StUpload>
-                    <UploadButton onClick={() => {handleImageUpload(files)}}>공유하기</UploadButton>
+                    <UploadButton onClick={() => {
+                      handleImageUpload(files)
+                      // test_function()
+                      }}>공유하기</UploadButton>
 
                 </StUpload>
                 <StInput onChange={onChange} placeholder='문구 입력 ...'>

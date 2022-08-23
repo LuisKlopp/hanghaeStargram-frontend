@@ -1,11 +1,17 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
+import Comments from "../elements/Comments";
 
 const Detail = ({modal, setModal, stuff}) => {
 
-  
+  const [comment, setComment] = useState("");
+
+  const onChange = (e) => {
+    setComment(e.target.value)
+    console.log(comment)
+  }
 
 
   return (
@@ -22,8 +28,12 @@ const Detail = ({modal, setModal, stuff}) => {
         
         </RightProfileDiv>
         <RightProfileDiv style={{border:'none', height:'100px'}}>
-        <Profile></Profile>
-        <span style={{marginLeft:'50px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
+        <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
+        <Comments></Comments>
+        <SubmitDiv>
+        <InputDiv onChange={onChange}></InputDiv>
+        <InputButton onClick={() => {console.log('dsd')}}  comment={comment} disabled={!comment}>게시</InputButton>
+        </SubmitDiv>
         </RightProfileDiv>
 
       </RightDiv>
@@ -65,6 +75,8 @@ const RightDiv = styled.div`
   display:flex;
   align-items: center;
   flex-direction:column;
+  position:relative;
+  
 `
 
 const RightProfileDiv = styled.div`
@@ -81,4 +93,34 @@ const X_button = styled.button`
   background-color: white;
   border: none;
   cursor: pointer;
+`
+const InputDiv = styled.input`
+  width:70%;
+  height:38px;
+  border:none; 
+  font-size:15px;
+  &:focus {
+    outline:none;
+  }
+`
+
+const InputButton =styled.button`
+  width:20%;
+  height:40px;
+  background-color: #ffffff;
+  color: ${({comment}) => comment ? '#001aff' : '#8c8c8cddd' };
+  font-weight: 600;
+  font-size:15px;
+  border:none;
+  cursor: ${({comment}) => comment ? 'pointer' : null }
+`
+
+const SubmitDiv = styled.div`
+  width:80%;
+  height:40px;
+  bottom:0;
+  position:absolute;
+  display: flex;
+  border-top:1px solid #d7d7d7;
+  justify-content: space-between;
 `
