@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 
 
-const MainProfile = () => {
+const MainProfile = ( ) => {
 
 
   return (

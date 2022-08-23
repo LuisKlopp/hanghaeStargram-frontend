@@ -6,19 +6,29 @@ import Main from './pages/Main'
 import Signup from './pages/Signup';
 import Newpost from './pages/Newpost';
 import Header from './components/Header'
-import Detail from './components/Detail';
 import Practice from './pages/Practice';
 import Mypage from './pages/Mypage';
 import react, {useEffect} from 'react'
+import UseGetUser from './hooks/UseGetUser';
 
 function App() {
 
   const {pathname} = useLocation();
 
+  const user = UseGetUser()
+
+  if (user === null) {
+    return (
+    <div>
+      로딩중
+    </div>
+    )
+  } 
+
 
   return (
     <>
-    { pathname !== '/' && pathname !== '/signup' ? <Header/> : null}
+    { pathname !== '/' && pathname !== '/signup' ? <Header user={user}/> : null}
         <Routes>
 
         <Route path="/" element={<Login />} />

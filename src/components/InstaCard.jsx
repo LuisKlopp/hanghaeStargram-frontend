@@ -4,14 +4,14 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({stuff, modal, setModal}) => {
+const InstaCard = ({stuff, modal, setModal, i}) => {
 
 
   return (
     <>
       <StWrapper>
       {
-      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff}/> : null
+      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff} i={i}/> : null
       }
 
         <CardHeader>
@@ -87,7 +87,7 @@ const CardImg = styled.div`
   width:100%;
   height:400px;
   background-size: 100% 100%;
-  background-image: url(${props => props.stuff.url});
+  background-image: url(${props => props.stuff.imageUrl});
   &:hover {
     background-size: 105% 105%;
     transition: 0.5s;
