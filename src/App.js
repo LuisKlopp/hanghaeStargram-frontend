@@ -9,7 +9,6 @@ import Header from './components/Header'
 import Detail from './components/Detail';
 import Practice from './pages/Practice';
 import Mypage from './pages/Mypage';
-import Newpost1 from './pages/Newpost1'
 import react, {useEffect} from 'react'
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
         <Route path="/" element={<Main/>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/newpost" element={<Newpost/>} />
-        <Route path="/newpost1" element={<Newpost1/>} />
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/practice" element={<Practice/>}/>
 
