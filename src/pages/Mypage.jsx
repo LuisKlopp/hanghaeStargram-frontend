@@ -1,11 +1,27 @@
 /*eslint-disable*/
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
+import axios from "axios"
 
 
 const Mypage = () => {
 
+  const [ posts, setPosts ] = useState(null)
+
+  const get_posts = async () => {
+    const { data } = await axios.get("http://localhost:3001/posts");
+    // console.log(data)
+    setPosts(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+  };
+
+  
+  useEffect(() => {
+    get_posts()
+  }, [])
+
+
+  console.log(posts)
 
   return (
     <>
@@ -25,10 +41,12 @@ const Mypage = () => {
         </StHeader>
 
       <StList>
-        <StPost/>
-        <StPost/>
-        <StPost/>
-        <StPost/>
+          {
+            posts?.map((stuff, i) => {
+             return  <StPost stuff={stuff} key={i}/>
+            })
+          } 
+
         </StList>
       </StWrapper>
     </>
@@ -91,11 +109,16 @@ const StList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top:50px;
-  
+
 `
 const StPost = styled.div`
   width:250px;
   height:280px;
-  border:1px solid black;
   margin-top:20px;
+  background-image: url(${props => props.stuff.url});
+  background-size: 100% 100%;
+  &:hover {
+    background-size:105% 105%;
+    transition: 0.2s;
+  }
 `

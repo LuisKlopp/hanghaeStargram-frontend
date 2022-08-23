@@ -6,7 +6,6 @@ import Detail from "./Detail"
 
 const InstaCard = ({stuff, modal, setModal}) => {
 
-  console.log(stuff.url)
 
   return (
     <>
@@ -21,8 +20,8 @@ const InstaCard = ({stuff, modal, setModal}) => {
         </CardHeader>
 
         <CardImg  onClick={() => {
-          setModal(modal = true)
-        }} stuff={stuff}></CardImg>
+          setModal(modal => modal = true)
+        }} stuff={stuff} style={{cursor:'pointer'}}></CardImg>
 
         <CardFooter>
 
@@ -68,7 +67,6 @@ const StWrapper = styled.div`
   width: 470px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #d7d7d7;
   background-color: #ffffff;;
   border-radius: 10px;
   margin-top:30px;
@@ -90,6 +88,10 @@ const CardImg = styled.div`
   height:400px;
   background-size: 100% 100%;
   background-image: url(${props => props.stuff.url});
+  &:hover {
+    background-size: 105% 105%;
+    transition: 0.5s;
+  }
 `
 const CardFooter = styled.div`
   width:100%;

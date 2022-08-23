@@ -5,7 +5,8 @@ import Profile from "../elements/Profile";
 
 const Detail = ({modal, setModal, stuff}) => {
 
-  console.log(stuff)
+  
+
 
   return (
     <>
@@ -49,6 +50,7 @@ const Stdiv = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: all 0.5s;
 `
 const LeftDiv = styled.div`
   width:70%;
