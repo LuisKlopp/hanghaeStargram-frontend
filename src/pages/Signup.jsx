@@ -50,8 +50,8 @@ export const Signup = () => {
 
   const handleUsername = (event) => {
     SetUsername(event.target.value);
-    if (event.target.value.length < 2 || event.target.value.length > 5) {
-      SetUsernameMessage('2~5 글자 미만으로 입력해주세요.');
+    if (event.target.value.length < 4 || event.target.value.length > 12) {
+      SetUsernameMessage('4~12 글자 미만으로 입력해주세요.');
       SetIsUsername(false);
     } else {
       SetUsernameMessage('올바른 형식입니다.');
@@ -106,15 +106,12 @@ export const Signup = () => {
     
     if (userInfo && isUsername && isNickname && isPassword ) {
       // /api/members/signup
-      axios.post("http://localhost:3001/posts", userInfo)
+      axios.post("https://01192mg.shop/api/members/signup", userInfo)
         .then((res) => {
           console.log("회원가입정보 ", res.data)
         });
       alert('회원가입이 완료되었습니다')
-      SetUsername("");
-      SetNickname("");
-      SetPassword("");
-      navigate('/login')
+      navigate('/')
     } else {
       alert("입력 정보를 다시 확인하세요.")
     }
@@ -127,7 +124,7 @@ export const Signup = () => {
             <StSignupBox>
                 <StImgBox/>
                 {/* <StInputBox name="email"  value={email} placeholder="휴대폰 또는 이메일 주소" onChange={handleEmail}/> */}
-                <StInputBox name="username"  value={username} placeholder="성명" onChange={handleUsername}/>
+                <StInputBox name="username"  value={username} placeholder="User ID" onChange={handleUsername}/>
                 {username.length > 0 && <span className={`message ${isUsername ? 'success' : 'error'}`}>{usernameMessage}</span>}
                 <StInputBox name="nickname"  value={nickname} placeholder="사용자 닉네임" onChange={handleNickname}/>
                 {nickname.length > 0 && <span className={`message ${isNickname ? 'success' : 'error'}`}>{nicknameMessage}</span>}
@@ -137,7 +134,7 @@ export const Signup = () => {
             </StSignupBox>
 
             <StLoginBox>계정이 있으신가요? <span onClick={() => {
-              navigate('/login')
+              navigate('/')
             }} style={{color:'#0095f6', marginLeft:'10px', fontWeight:'600', cursor:'pointer'}}>로그인</span></StLoginBox>
 
         </StWrapper>

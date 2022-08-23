@@ -90,8 +90,7 @@ const Newpost = () => {
         
         if (content !== '' && url !== ''){
           await axios.post("http://localhost:3001/posts", info)
-         alert('업로드 완료!')
-         // navigate('/')
+         navigate('/main')
          } else {
              alert('빈칸을 전부 채워주세요')
          }
