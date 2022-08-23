@@ -108,14 +108,14 @@ export const Signup = () => {
       // /api/members/signup
       axios.post("http://localhost:3001/posts", userInfo)
         .then((res) => {
-          console.log(res.data)// 쿠키에 토큰 저장
+          console.log("회원가입정보 ", res.data)
         });
       alert('회원가입이 완료되었습니다')
       SetUsername("");
       SetNickname("");
       SetPassword("");
       navigate('/login')
-    } else{
+    } else {
       alert("입력 정보를 다시 확인하세요.")
     }
   }

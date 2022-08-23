@@ -76,7 +76,7 @@ const Login = () => {
         <StLoginBox>
           <StImgBox></StImgBox>
           <StInputBox name="userid" placeholder="ID" onChange={(event) => {SetUserid(event.target.value)}}></StInputBox>
-          <StInputBox name="password" placeholder="비밀번호" onChange={(event) => {SetPassword(event.target.value)}}></StInputBox>
+          <StInputBox type="password" name="password" placeholder="비밀번호" onChange={(event) => {SetPassword(event.target.value)}}></StInputBox>
           <StButton userid={userid} password={password} disabled={!userid.length && !password.length} onClick={onClickLogin}>로그인</StButton>
         </StLoginBox>
         <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
