@@ -13,10 +13,10 @@ const Header = () => {
     <>
       <StWrapper>
         <StWrapper_1>
-          <StLogo onClick={() => { navigate('/')}} />
+          <StLogo onClick={() => { navigate('/main')}} />
           <StSearchbar placeholder="검색"/>
           <StIconDiv>
-          <StIcon onClick={() => { navigate('/')}}/>
+          <StIcon onClick={() => { navigate('/main')}}/>
           <StIcon_1 onClick={() => {alert('기능 준비중입니다!')}}/>
           <StIcon_2 onClick={() => {navigate('/newpost')}}/>
           <StIcon_5 onClick={() => {navigate('/mypage')}}/>

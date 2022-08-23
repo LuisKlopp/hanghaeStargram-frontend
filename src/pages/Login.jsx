@@ -3,7 +3,10 @@ import React, {useState, useReducer} from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import axios from "axios";
-import { setAccessToken } from "../Cookie";
+import { setAccessToken, setRefreshToken, getCookieToken } from "../Cookie";
+
+axios.defaults.withCredentials = true;
+
 
 // 로그인 API /api/members/login
 // “username”: "iamuser",
@@ -33,11 +36,11 @@ const Login = () => {
   // console.log(state)
 
   const navigate = useNavigate();
-  const [userid, SetUserid] = useState("");
+  const [username, SetUsername] = useState("");
   const [password, SetPassword] = useState("");
 
   const onClickLogin = async() => {
-    if (userid === ""){
+    if (username === ""){
       return window.alert("아이디 입력하세요.")
     } else if( password === ""){
       return window.alert("비밀번호를 입력하세요.")
@@ -46,22 +49,26 @@ const Login = () => {
       let res = await axios({
         method: "POST",
         // /api/members/login
-        url:"http://localhost:3001/posts",
+        url:"https://01192mg.shop/api/members/login",
         data: {
-          userid,
-          password,
-        },
-      });
+          username,
+          password
+        }, 
+        headers: {
+            "Authorization" : getCookieToken(),
+        }
+      })
+
 
       if (res.data.success === false){
         alert("아이디 또는 비밀번호를 확인해주세요.")
-        navigate("/login");
+        window.location.reload()
       } else{
-          setAccessToken(res.headers.authorization);
-          axios.defaults.headers.common[
-            "Authorization"
-          ] = `$(res.headers.authorization)`;
-          navigate("/");
+        console.log(res.headers.authorization)
+        setAccessToken(res.headers.authorization);
+        // setRefreshToken(res.headers['refresh-token'])
+        navigate("/main")
+        window.location.reload()
       }
     } catch(err){
       throw new Error(err);
@@ -74,9 +81,9 @@ const Login = () => {
       <StWrapper>
         <StLoginBox>
           <StImgBox></StImgBox>
-          <StInputBox name="userid" placeholder="ID" onChange={(event) => {SetUserid(event.target.value)}}></StInputBox>
+          <StInputBox name="username" placeholder="ID" onChange={(event) => {SetUsername(event.target.value)}}></StInputBox>
           <StInputBox type="password" name="password" placeholder="비밀번호" onChange={(event) => {SetPassword(event.target.value)}}></StInputBox>
-          <StButton userid={userid} password={password} disabled={userid.length === 0 || password.length === 0} onClick={onClickLogin}>로그인</StButton>
+          <StButton username={username} password={password} disabled={username.length === 0 || password.length === 0} onClick={onClickLogin}>로그인</StButton>
         </StLoginBox>
         <StSignupBox>계정이없으신가요? <span style={{color:'#0095f6', marginLeft:'20px', fontWeight:'600', cursor:'pointer'}} onClick={() => {
           navigate('/signup')
@@ -158,6 +165,6 @@ const StButton = styled.button`
   color:white;
   font-weight:600;
   font-size:18px;
-  background-color: ${({userid, password}) => userid !== '' && password !== '' ? '#0095f6' : '#ececec' };
-  cursor: ${({userid, password}) => userid !== '' && password !== '' ? 'pointer' : null }
+  background-color: ${({username, password}) => username !== '' && password !== '' ? '#0095f6' : '#ececec' };
+  cursor: ${({username, password}) => username !== '' && password !== '' ? 'pointer' : null }
 `

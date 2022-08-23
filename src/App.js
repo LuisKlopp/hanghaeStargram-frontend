@@ -18,11 +18,11 @@ function App() {
 
   return (
     <>
-    { pathname !== '/login' && pathname !== '/signup' ? <Header/> : null}
+    { pathname !== '/' && pathname !== '/signup' ? <Header/> : null}
         <Routes>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Main/>}/>
+        <Route path="/" element={<Login />} />
+        <Route path="/main" element={<Main/>}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/newpost" element={<Newpost/>} />
         <Route path="/mypage" element={<Mypage/>}/>
