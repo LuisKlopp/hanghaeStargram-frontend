@@ -105,8 +105,8 @@ export const Signup = () => {
     }
     
     if (userInfo && isUsername && isNickname && isPassword ) {
-      // /api/members/signup
-      axios.post("https://01192mg.shop/api/members/signup", userInfo)
+      axios.post("http://localhost:3001/posts", userInfo)
+      // axios.post("https://01192mg.shop/api/members/signup", userInfo)
         .then((res) => {
           console.log("회원가입정보 ", res.data)
           if(!res.data.success) {
