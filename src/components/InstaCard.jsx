@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Detail from "./Detail"
+import CardProfile from "../elements/CardProfile";
 
 const InstaCard = ({stuff, posts}) => {
 
@@ -15,6 +16,7 @@ const InstaCard = ({stuff, posts}) => {
   const set_modal = () => {
     setModal(true)
     setTargetId(stuff.id)
+    console.log(stuff)
   }
 
 
@@ -26,7 +28,7 @@ const InstaCard = ({stuff, posts}) => {
       }
 
         <CardHeader>
-          <Profile></Profile>
+          <CardProfile stuff={stuff}></CardProfile>
           <DotImg></DotImg>
         </CardHeader>
         <CardImg  onClick={() => {

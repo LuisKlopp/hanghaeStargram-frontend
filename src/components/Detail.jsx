@@ -5,6 +5,7 @@ import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
 import axios from "axios"
 import { getCookieToken } from "../Cookie";
+import CardProfile from "../elements/CardProfile";
 
 const Detail = ({setModal, stuff}) => {
 
@@ -46,7 +47,7 @@ const Detail = ({setModal, stuff}) => {
       <LeftDiv stuff={stuff}></LeftDiv>
       <RightDiv>
         <RightProfileDiv style={{display:'flex'}}>
-        <Profile></Profile>
+        <CardProfile stuff={stuff}></CardProfile>
         <X_button onClick={() => {
           setModal(modal => modal = false)
         }}>X</X_button>
