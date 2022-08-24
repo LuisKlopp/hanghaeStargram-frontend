@@ -1,58 +1,40 @@
 /*eslint-disable*/
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import axios from 'axios'
 
 const Storybox = () => {
+
+  const [ members, setMembers ] = useState([])
+
+
+  const get_members = async () => {
+    const { data } = await axios.get("https://01192mg.shop/api/members");
+    setMembers(data.data)
+    console.log(members)
+  };
+
+  useEffect(() => {
+    get_members()
+  }, [])
 
 
   return (
     <>
       <StWrapper>
 
-        <StStory>
-          <StProfile>
+      {
+        members?.map((a, i) => {
+      return  <StStory key={i}>
+          <StProfile a={a} >
           </StProfile>
           <StUsername>
-              ryu_ver...
+              {a.nickname}
           </StUsername>
         </StStory>
+        })
+      }
 
-        <StStory>
-          <StProfile>
-          </StProfile>
-          <StUsername>
-              ryu_ver...
-          </StUsername>
-        </StStory>
-        <StStory>
-          <StProfile>
-          </StProfile>
-          <StUsername>
-              ryu_ver...
-          </StUsername>
-        </StStory>
-        <StStory>
-          <StProfile>
-          </StProfile>
-          <StUsername>
-              ryu_ver...
-          </StUsername>
-        </StStory>
-        <StStory>
-          <StProfile>
-          </StProfile>
-          <StUsername>
-              ryu_ver...
-          </StUsername>
-        </StStory>
-        <StStory>
-          <StProfile>
-          </StProfile>
-          <StUsername>
-              ryu_ver...
-          </StUsername>
-        </StStory>
-        
 
       </StWrapper>
     </>
@@ -95,7 +77,7 @@ const StProfile = styled.div`
   height:60%;
   border-radius: 50px;
   cursor:pointer;
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRblGEH-slY1eScff-YLhFFEyTDPhju47lAcA&usqp=CAU');
+  background-image: url(${(props => props.a.profileImageUrl)});
   background-size : cover;
 
 `

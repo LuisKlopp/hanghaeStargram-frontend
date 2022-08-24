@@ -62,7 +62,7 @@ const Main = () => {
         <StRightdiv>
           <StRightdiv_1>
           <MainProfile onClick={() => { navigate('/mypage')}} user={user}></MainProfile>
-          <Members ></Members>
+          {/* <Members ></Members> */}
           </StRightdiv_1>
         </StRightdiv>
       </StWrapper>

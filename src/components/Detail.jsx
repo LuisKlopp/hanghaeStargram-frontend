@@ -3,14 +3,40 @@ import React, {useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
+import axios from "axios"
+import { getCookieToken } from "../Cookie";
 
 const Detail = ({setModal, stuff}) => {
 
   const [comment, setComment] = useState("");
+  let comments = stuff.comments
+
 
   const onChange = (e) => {
     setComment(e.target.value)
+    console.log(comment)
   }
+
+
+  const postComment = async (id) => {
+    const obj = {
+      content: comment,
+    }
+    
+    const response = await axios.post(`https://01192mg.shop/api/comments/${id}`, obj, {
+      headers: {
+        "Authorization" : getCookieToken()
+      }
+    })
+    window.location.reload()
+  }
+
+  const deleteComment = async (id) => {
+
+  }
+
+
+
 
   return (
     <>
@@ -27,11 +53,17 @@ const Detail = ({setModal, stuff}) => {
         
         </RightProfileDiv>
         <RightProfileDiv style={{border:'none', height:'100px'}}>
-        <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
-        <Comments stuff={stuff}></Comments>
+        <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}</span>
+        { 
+        comments?.map(( a, i ) =>  {
+              return <Comments comments={comments} stuff={stuff} key={stuff.id} a={a}></Comments>
+            } )
+            }
         <SubmitDiv>
         <InputDiv onChange={onChange} placeholder='댓글을 입력하세요!'></InputDiv>
-        <InputButton onClick={() => {console.log('dsd')}}  comment={comment} disabled={!comment}>게시</InputButton>
+        <InputButton onClick={() => {
+          postComment(stuff.id)
+        }}  comment={comment} disabled={!comment}>게시</InputButton>
         </SubmitDiv>
         </RightProfileDiv>
 
