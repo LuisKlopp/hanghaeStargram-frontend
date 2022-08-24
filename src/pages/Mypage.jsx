@@ -25,7 +25,25 @@ const Mypage = () => {
   useEffect(() => {
     get_posts()
   }, [])
+
+  const postDelete = (id) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      apiDelete(id)
+      window.location.reload()
+    } else {
+      null
+    }
+  }
   
+
+  const apiDelete = async (id) => {
+    const response = await axios.delete(`https://01192mg.shop/api/posts/${id}`, {
+      headers: {
+        "Authorization" : getCookieToken()
+      }
+    })
+    console.log(response)
+  }
 
   if (user === null) {
     return (
@@ -57,7 +75,9 @@ const Mypage = () => {
       <StList>
           {
             posts?.map((stuff, i) => {
-             return  <StPost stuff={stuff} key={i}></StPost>
+             return  <StPost onClick={() => {
+              postDelete(stuff.id)
+             }} stuff={stuff} key={i}></StPost>
             })
           } 
 

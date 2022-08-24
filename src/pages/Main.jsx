@@ -17,7 +17,7 @@ const Main = () => {
 
   const navigate = useNavigate()
   const [ posts, setPosts ] = useState(null)
-  const [ modal, setModal ] = useState(false)
+
 
   const cook = UseCheckCookie()
   const user = UseGetUser();
@@ -45,7 +45,7 @@ const Main = () => {
 
   return (
     <>
-    <GlobalStyle modal={modal}/>
+    <GlobalStyle/>
       <StWrapper>
 
 
@@ -53,7 +53,7 @@ const Main = () => {
           <Storybox></Storybox>
           {
             posts.map((stuff, i) => {
-             return  <InstaCard stuff={stuff} key={i} stuff_key={stuff.id} modal={modal} setModal={setModal} i={i} posts={posts}/>
+             return  <InstaCard stuff={stuff} key={stuff.id} i={i} posts={posts}/>
             })
           } 
         </StLeftdiv>
@@ -81,7 +81,7 @@ const GlobalStyle = createGlobalStyle`
 		margin: 0;
     background-color: ecdede;
     overflow-x: hidden;
-    overflow:${({modal}) => modal === true ? 'hidden' : null};
+    /* overflow:${({modal}) => modal === true ? 'hidden' : null}; */
 	}
   `;
 

@@ -4,24 +4,26 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({stuff, modal, setModal, i, posts, stuff_key}) => {
+const InstaCard = ({stuff, posts}) => {
 
 
 
   let [name , setName] = useState(0)
+  let [ targetId, setTargetId ] = useState(0)
+  let [ modal, setModal ] = useState(false)
 
-  console.log(stuff.id)
 
   const set_modal = () => {
     setModal(true)
+    setTargetId(stuff.id)
   }
 
-  // console.log(stuff_key)
+
   return (
     <>
       <StWrapper>
       {
-      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff} posts={posts} name={name}/> : null
+      modal ? <Detail modal={modal} targetId={targetId} setModal={setModal} stuff={stuff} posts={posts} name={name}/> : null
       }
 
         <CardHeader>
