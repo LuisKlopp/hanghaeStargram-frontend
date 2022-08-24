@@ -5,11 +5,13 @@ import Profile from "../elements/Profile";
 import axios from "axios"
 import UseGetUser from "../hooks/UseGetUser";
 import { getCookieToken } from "../Cookie";
+import EditInfo from "../components/EditInfo";
 
 
 const Mypage = () => {
 
   const [ posts, setPosts ] = useState(null)
+  const [ edit, setEdit ] = useState(false)
 
   const get_posts = async () => {
     const { data } = await axios.get("https://01192mg.shop/api/mypage/posts", {
@@ -29,7 +31,6 @@ const Mypage = () => {
   const postDelete = (id) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       apiDelete(id)
-      window.location.reload()
     } else {
       null
     }
@@ -42,7 +43,7 @@ const Mypage = () => {
         "Authorization" : getCookieToken()
       }
     })
-    console.log(response)
+    window.location.reload()
   }
 
   if (user === null) {
@@ -60,6 +61,10 @@ const Mypage = () => {
         <GlobalStyle/>
       <StWrapper>
 
+        {
+          edit ? <EditInfo user={user} edit={edit} setEdit={setEdit}></EditInfo> : null
+        }
+
         <StHeader>
         <div style={{display:'flex', height:'100%', width:'100%', alignItems:'center'}}>
         <StProfile user={user}>
@@ -69,6 +74,11 @@ const Mypage = () => {
           <StUserName style={{fontWeight:'400', fontSize:'20px'}}>게시물 {posts?.length}개</StUserName>
           <StUserName style={{paddingRight:'60px', fontWeight:'500', fontSize:'24px'}}>{user.nickname}</StUserName>
         </StNameDiv>
+        <StEditButton onClick={() => {
+          setEdit(true)
+        }}>
+          정보수정
+        </StEditButton>
         </div>
         </StHeader>
 
@@ -168,4 +178,15 @@ const StDelete = styled.span`
   z-index:4;
   opacity: 0;
   
+`
+
+const StEditButton = styled.button`
+  width:100px;
+  height:50px;
+  background-color: #ffffff;
+  font-weight: 600;
+  color:#4788e3;
+  border:2px solid #4788e3;
+  font-size:18px;
+  cursor: pointer;
 `

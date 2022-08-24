@@ -20,7 +20,7 @@ function App() {
   if (user === null) {
     return (
     <div>
-      로딩중
+      로딩중1
     </div>
     )
   } 

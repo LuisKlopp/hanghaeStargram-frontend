@@ -8,10 +8,9 @@ const InstaCard = ({stuff, posts}) => {
 
 
 
-  let [name , setName] = useState(0)
   let [ targetId, setTargetId ] = useState(0)
   let [ modal, setModal ] = useState(false)
-
+  let [ name, setName ] = useState('')
 
   const set_modal = () => {
     setModal(true)
@@ -50,9 +49,6 @@ const InstaCard = ({stuff, posts}) => {
             <div style={{display:'flex', width:'300px'}}>
             <LikeSpan >
               {stuff.content}
-            </LikeSpan>
-            <LikeSpan style={{color:'grey', marginLeft:'10px', cursor:'pointer'}}>
-              ...더보기
             </LikeSpan>
             </div>
           </FooterDiv2>
@@ -106,7 +102,7 @@ const CardImg = styled.div`
 `
 const CardFooter = styled.div`
   width:100%;
-  height:200px;
+  height:150px;
   display:flex;
   flex-direction:column;
 `

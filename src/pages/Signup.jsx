@@ -62,8 +62,8 @@ export const Signup = () => {
 
   const handleNickname = (event) => {
     SetNickname(event.target.value)
-    if (event.target.value.length < 2 || event.target.value.length > 10) {
-      SetNicknameMessage('2~10 글자 미만으로 입력해주세요.');
+    if (event.target.value.length < 2 || event.target.value.length > 7) {
+      SetNicknameMessage('2~7 글자 미만으로 입력해주세요.');
       SetIsNickname(false);
     } else {
       SetNicknameMessage('사용가능한 닉네임입니다.');

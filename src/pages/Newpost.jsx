@@ -57,6 +57,7 @@ const Newpost = () => {
       const handleImageUpload = async (fileList) => {
 
 
+
         try {
           setUploading(true);
           const urls = await Promise.all(
