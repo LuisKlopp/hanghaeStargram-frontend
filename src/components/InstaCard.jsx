@@ -4,23 +4,32 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({stuff, modal, setModal}) => {
+const InstaCard = ({stuff, modal, setModal, i, posts, stuff_key}) => {
 
 
+
+  let [name , setName] = useState(0)
+
+  console.log(stuff.id)
+
+  const set_modal = () => {
+    setModal(true)
+  }
+
+  // console.log(stuff_key)
   return (
     <>
       <StWrapper>
       {
-      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff}/> : null
+      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff} posts={posts} name={name}/> : null
       }
 
         <CardHeader>
           <Profile></Profile>
           <DotImg></DotImg>
         </CardHeader>
-
         <CardImg  onClick={() => {
-          setModal(modal => modal = true)
+          set_modal()
         }} stuff={stuff} style={{cursor:'pointer'}}></CardImg>
 
         <CardFooter>
@@ -87,7 +96,7 @@ const CardImg = styled.div`
   width:100%;
   height:400px;
   background-size: 100% 100%;
-  background-image: url(${props => props.stuff.url});
+  background-image: url(${props => props.stuff.imageUrl});
   &:hover {
     background-size: 105% 105%;
     transition: 0.5s;

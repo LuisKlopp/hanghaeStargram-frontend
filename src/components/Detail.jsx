@@ -4,26 +4,31 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
 
-const Detail = ({modal, setModal, stuff}) => {
+const Detail = ({modal, setModal, stuff, name, posts}) => {
 
   const [comment, setComment] = useState("");
 
   const onChange = (e) => {
     setComment(e.target.value)
-    console.log(comment)
   }
+
+
+
+
+
 
 
   return (
     <>
 
+    <StContainer>
     <Stdiv>
       <LeftDiv stuff={stuff}></LeftDiv>
       <RightDiv>
         <RightProfileDiv style={{display:'flex'}}>
         <Profile></Profile>
         <X_button onClick={() => {
-          setModal(modal = false)
+          setModal(modal => modal = false)
         }}>X</X_button>
         
         </RightProfileDiv>
@@ -31,13 +36,14 @@ const Detail = ({modal, setModal, stuff}) => {
         <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
         <Comments></Comments>
         <SubmitDiv>
-        <InputDiv onChange={onChange}></InputDiv>
+        <InputDiv onChange={onChange} placeholder='댓글을 입력하세요!'></InputDiv>
         <InputButton onClick={() => {console.log('dsd')}}  comment={comment} disabled={!comment}>게시</InputButton>
         </SubmitDiv>
         </RightProfileDiv>
 
       </RightDiv>
     </Stdiv>
+    </StContainer>
 
     </>
   );
@@ -45,6 +51,12 @@ const Detail = ({modal, setModal, stuff}) => {
 
 
 export default Detail;
+
+const StContainer = styled.div`
+  width:100%;
+  height:100%;
+  background-color: black;
+`
 
 
 const Stdiv = styled.div`
@@ -65,7 +77,7 @@ const Stdiv = styled.div`
 const LeftDiv = styled.div`
   width:70%;
   height:100%;
-  background-image: url(${props => props.stuff.url});
+  background-image: url(${props => props.stuff.imageUrl});
   background-size: 100% 100%;
   `
 const RightDiv = styled.div`

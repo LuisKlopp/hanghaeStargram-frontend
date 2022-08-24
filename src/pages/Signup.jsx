@@ -109,9 +109,14 @@ export const Signup = () => {
       // axios.post("https://01192mg.shop/api/members/signup", userInfo)
         .then((res) => {
           console.log("회원가입정보 ", res.data)
+          if(!res.data.success) {
+            alert('아이디가 중복되었습니다!')
+            window.location.reload()
+          } else {
+            alert('회원가입이 완료되었습니다')
+            navigate('/')
+          }
         });
-      alert('회원가입이 완료되었습니다')
-      navigate('/')
     } else {
       alert("입력 정보를 다시 확인하세요.")
     }
@@ -126,7 +131,7 @@ export const Signup = () => {
                 {/* <StInputBox name="email"  value={email} placeholder="휴대폰 또는 이메일 주소" onChange={handleEmail}/> */}
                 <StInputBox name="username"  value={username} placeholder="User ID" onChange={handleUsername}/>
                 {username.length > 0 && <span className={`message ${isUsername ? 'success' : 'error'}`}>{usernameMessage}</span>}
-                <StInputBox name="nickname"  value={nickname} placeholder="사용자 닉네임" onChange={handleNickname}/>
+                <StInputBox name="nickname"  value={nickname} placeholder="닉네임" onChange={handleNickname}/>
                 {nickname.length > 0 && <span className={`message ${isNickname ? 'success' : 'error'}`}>{nicknameMessage}</span>}
                 <StInputBox name="password"  type="password" value={password} placeholder="비밀번호" onChange={handlePassword}/>
                 {password.length > 0 && (<span style={{width:'60%'}} className={`message ${isPassword ? 'success' : 'error'}`}>{passwordMessage}</span>)}
