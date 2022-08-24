@@ -48,8 +48,8 @@ const Login = () => {
     try{
       let res = await axios({
         method: "POST",
-        // /api/members/login
-        url:"https://01192mg.shop/api/members/login",
+        url:"http://localhost:3001/posts",
+        // url:"https://01192mg.shop/api/members/login",
         data: {
           username,
           password
