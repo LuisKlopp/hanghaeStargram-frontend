@@ -4,19 +4,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
 
-const Detail = ({modal, setModal, stuff, name, posts}) => {
+const Detail = ({setModal, stuff}) => {
 
   const [comment, setComment] = useState("");
 
   const onChange = (e) => {
     setComment(e.target.value)
   }
-
-
-
-
-
-
 
   return (
     <>
@@ -34,7 +28,7 @@ const Detail = ({modal, setModal, stuff, name, posts}) => {
         </RightProfileDiv>
         <RightProfileDiv style={{border:'none', height:'100px'}}>
         <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
-        <Comments></Comments>
+        <Comments stuff={stuff}></Comments>
         <SubmitDiv>
         <InputDiv onChange={onChange} placeholder='댓글을 입력하세요!'></InputDiv>
         <InputButton onClick={() => {console.log('dsd')}}  comment={comment} disabled={!comment}>게시</InputButton>

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 
-const Comments = () => {
+const Comments = ({stuff}) => {
 
   
   return (
@@ -14,7 +14,7 @@ const Comments = () => {
         <StProfile>
         </StProfile>
         <StNameDiv>
-          <StUserName style={{fontWeight:'600'}}>ryu_verpool9</StUserName>
+          <StUserName style={{fontWeight:'600'}}></StUserName>
           <StUserName style={{paddingRight:'60px'}}>댓글 테스트1</StUserName>
         </StNameDiv>
         </div>
