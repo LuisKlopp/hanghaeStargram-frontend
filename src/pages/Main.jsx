@@ -53,7 +53,7 @@ const Main = () => {
           <Storybox></Storybox>
           {
             posts.map((stuff, i) => {
-             return  <InstaCard stuff={stuff} key={i} modal={modal} setModal={setModal} i={i}/>
+             return  <InstaCard stuff={stuff} key={i} stuff_key={stuff.id} modal={modal} setModal={setModal} i={i} posts={posts}/>
             })
           } 
         </StLeftdiv>

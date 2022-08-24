@@ -4,19 +4,18 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
 
-const Detail = ({modal, setModal, stuff}) => {
+const Detail = ({modal, setModal, stuff, name, posts}) => {
 
   const [comment, setComment] = useState("");
 
   const onChange = (e) => {
     setComment(e.target.value)
-    console.log(comment)
   }
 
-  
 
 
-  console.log(stuff)
+
+
 
 
   return (
@@ -37,7 +36,7 @@ const Detail = ({modal, setModal, stuff}) => {
         <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}<span style={{fontWeight:'600', marginLeft:'20px'}}>더보기</span></span>
         <Comments></Comments>
         <SubmitDiv>
-        <InputDiv onChange={onChange}></InputDiv>
+        <InputDiv onChange={onChange} placeholder='댓글을 입력하세요!'></InputDiv>
         <InputButton onClick={() => {console.log('dsd')}}  comment={comment} disabled={!comment}>게시</InputButton>
         </SubmitDiv>
         </RightProfileDiv>

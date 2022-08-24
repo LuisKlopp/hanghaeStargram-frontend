@@ -4,23 +4,32 @@ import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Detail from "./Detail"
 
-const InstaCard = ({stuff, modal, setModal, i}) => {
+const InstaCard = ({stuff, modal, setModal, i, posts, stuff_key}) => {
 
 
+
+  let [name , setName] = useState(0)
+
+  console.log(stuff.id)
+
+  const set_modal = () => {
+    setModal(true)
+  }
+
+  // console.log(stuff_key)
   return (
     <>
       <StWrapper>
       {
-      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff} i={i}/> : null
+      modal ? <Detail modal={modal} setModal={setModal} stuff={stuff} posts={posts} name={name}/> : null
       }
 
         <CardHeader>
           <Profile></Profile>
           <DotImg></DotImg>
         </CardHeader>
-
         <CardImg  onClick={() => {
-          setModal(modal => modal = true)
+          set_modal()
         }} stuff={stuff} style={{cursor:'pointer'}}></CardImg>
 
         <CardFooter>
