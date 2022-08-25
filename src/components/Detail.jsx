@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
@@ -7,17 +7,17 @@ import axios from "axios"
 import { getCookieToken } from "../Cookie";
 import CardProfile from "../elements/CardProfile";
 import { useDispatch, useSelector } from 'react-redux'
-import { addCommentList, delteComment } from '../redux/modules/commentSlice';
+import { addCommentList, delteComment, getDetailComments } from '../redux/modules/commentSlice';
 
 
 
 
 const Detail = ({setModal, stuff, user}) => {
 
-  const { data } = useSelector((state) => state.comments)
-  console.log(data)
+  const  { data }= useSelector((state) => state.comments.comments)
 
 
+  const [ temp_comment, setTempComment ] = useState(null)
   const [comment, setComment] = useState("");
   let comments = stuff.comments
   const dispatch = useDispatch()
@@ -34,9 +34,13 @@ const Detail = ({setModal, stuff, user}) => {
     dispatch(addCommentList(newList))
   }
 
+  useEffect(() => {
+    dispatch(getDetailComments(stuff.id))
+  }, [])
+
   
   
-  if ( comments === undefined ) {
+  if ( data === undefined ) {
     return (
       <div>
 
@@ -72,7 +76,7 @@ const Detail = ({setModal, stuff, user}) => {
         <RightProfileDiv style={{border:'none', height:'100px'}}>
         <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}</span>
         { 
-        comments?.map(( a, i ) =>  {
+        data && data.map(( a, i ) =>  {
               return <Comments key={i} a={a} user={user}></Comments>
             } )
             }

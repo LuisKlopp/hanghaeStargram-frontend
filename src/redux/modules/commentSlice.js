@@ -11,6 +11,7 @@ const initialState = {
 export const getDetailComments = createAsyncThunk(
   "comments/getComment",
   async (payload, thunkAPI) => {
+    console.log(payload)
     try {
       const data = await axios.get(`https://01192mg.shop/api/comments/${payload}`);
       return thunkAPI.fulfillWithValue(data.data);
@@ -67,6 +68,7 @@ export const commentSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getDetailComments.fulfilled]: (state, action) => {
+      console.log(state.comments, action)
       state.comments = action.payload;
     },
     [getDetailComments.rejected]: (state, action) => {
@@ -84,6 +86,7 @@ export const commentSlice = createSlice({
     },
     [deleteContent.fulfilled]: (state, { payload }) => { 
       console.log(payload)
+      
       state.comments.data = state.comments.data.filter((comment) => comment.id !==  payload)
     },
 
