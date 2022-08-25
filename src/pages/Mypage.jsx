@@ -6,12 +6,16 @@ import axios from "axios"
 import UseGetUser from "../hooks/UseGetUser";
 import { getCookieToken } from "../Cookie";
 import EditInfo from "../components/EditInfo";
+import UseCheckCookie from "../hooks/UseCheckCookie";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Mypage = () => {
 
   const [ posts, setPosts ] = useState(null)
   const [ edit, setEdit ] = useState(false)
+  const navigate = useNavigate()
 
   const get_posts = async () => {
     const { data } = await axios.get("https://01192mg.shop/api/mypage/posts", {
@@ -23,6 +27,7 @@ const Mypage = () => {
   };
 
   const user = UseGetUser();
+  const cookie = UseCheckCookie();
   
   useEffect(() => {
     get_posts()
@@ -52,8 +57,11 @@ const Mypage = () => {
       로딩중!
     </div>
       )
-      
   }
+
+  // if (!cookie) {
+  //   navigate('/')
+  //     }
 
 
   return (
@@ -189,4 +197,9 @@ const StEditButton = styled.button`
   border:2px solid #4788e3;
   font-size:18px;
   cursor: pointer;
+  &:hover{
+    background-color: #4788e3;
+    color:#ffffff;
+    transition: 0.8s;
+  }
 `

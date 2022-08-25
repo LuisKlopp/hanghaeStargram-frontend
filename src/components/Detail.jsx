@@ -6,36 +6,52 @@ import Comments from "../elements/Comments";
 import axios from "axios"
 import { getCookieToken } from "../Cookie";
 import CardProfile from "../elements/CardProfile";
+import { useDispatch, useSelector } from 'react-redux'
+import { addCommentList, delteComment } from '../redux/modules/commentSlice';
 
-const Detail = ({setModal, stuff}) => {
+
+
+
+const Detail = ({setModal, stuff, user}) => {
+
+  const { data } = useSelector((state) => state.comments)
+  console.log(data)
+
 
   const [comment, setComment] = useState("");
   let comments = stuff.comments
-
+  const dispatch = useDispatch()
 
   const onChange = (e) => {
     setComment(e.target.value)
-    console.log(comment)
   }
 
-
-  const postComment = async (id) => {
-    const obj = {
+  const addComment = async (id) => {
+    const newList = {
+      id: id,
       content: comment,
-    }
+  }
+    dispatch(addCommentList(newList))
+  }
+
+  
+  
+  if ( comments === undefined ) {
+    return (
+      <div>
+
+      </div>
+    )
+  }
+
     
-    const response = await axios.post(`https://01192mg.shop/api/comments/${id}`, obj, {
-      headers: {
-        "Authorization" : getCookieToken()
-      }
-    })
-    window.location.reload()
-  }
-
-  const deleteComment = async (id) => {
-
-  }
-
+  //   const response = await axios.post(`https://01192mg.shop/api/comments/${id}`, obj, {
+  //     headers: {
+  //       "Authorization" : getCookieToken()
+  //     }
+  //   })
+  //   window.location.reload()
+  // }
 
 
 
@@ -46,7 +62,7 @@ const Detail = ({setModal, stuff}) => {
     <Stdiv>
       <LeftDiv stuff={stuff}></LeftDiv>
       <RightDiv>
-        <RightProfileDiv style={{display:'flex'}}>
+        <RightProfileDiv style={{display:'flex', justifyContent:'space-between'}}>
         <CardProfile stuff={stuff}></CardProfile>
         <X_button onClick={() => {
           setModal(modal => modal = false)
@@ -57,13 +73,13 @@ const Detail = ({setModal, stuff}) => {
         <span style={{marginLeft:'20px', lineHeight:'100px'}}>{stuff.content}</span>
         { 
         comments?.map(( a, i ) =>  {
-              return <Comments comments={comments} stuff={stuff} key={stuff.id} a={a}></Comments>
+              return <Comments key={i} a={a} user={user}></Comments>
             } )
             }
         <SubmitDiv>
         <InputDiv onChange={onChange} placeholder='댓글을 입력하세요!'></InputDiv>
         <InputButton onClick={() => {
-          postComment(stuff.id)
+          addComment(stuff.id)
         }}  comment={comment} disabled={!comment}>게시</InputButton>
         </SubmitDiv>
         </RightProfileDiv>

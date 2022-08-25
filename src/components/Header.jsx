@@ -19,7 +19,6 @@ const Header = ({user}) => {
     }
   };
 
-  console.log(user.profileImageUrl)
 
 
 

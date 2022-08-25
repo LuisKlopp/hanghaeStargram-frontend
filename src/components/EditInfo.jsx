@@ -5,14 +5,20 @@ import Profile from "../elements/Profile";
 import Comments from "../elements/Comments";
 import axios from "axios"
 import { getCookieToken } from "../Cookie";
+import { ref, uploadBytesResumable, getDownloadURL, connectStorageEmulator } from "firebase/storage";
+import { storage } from "../api/firebase";
+
+
 
 const EditInfo = ({user, edit, setEdit}) => {
 
+  const selectFile = useRef("");
 
   const [files, setFileList] = useState([]); 
   const [ imgurl, setImgUrl ] = useState('')
-  const selectFile = useRef("");
   const [ nickname , setNickname] = useState('')
+  const [loading, setUploading] = useState(null);
+
 
 
 
@@ -46,6 +52,8 @@ const EditInfo = ({user, edit, setEdit}) => {
 
 
       try {
+        setUploading(true);
+
         const urls = await Promise.all(
           fileList?.map(async (file) => {
             const storageRef = ref(storage, `profile/${file.name}`);
@@ -62,6 +70,8 @@ const EditInfo = ({user, edit, setEdit}) => {
       catch (err) {
         console.error(err);
       }
+      setUploading(false);
+
     };
 
 
@@ -79,13 +89,13 @@ const EditInfo = ({user, edit, setEdit}) => {
       //   alert('3글자이상 7글자미만으로 입력해주세요')
       // }
       
-      if (nickname !== '' && url !== ''){
-        await axios.post("https://01192mg.shop/api/mypage/profile", info, {
+      if (nickname !== ''){
+        await axios.put("https://01192mg.shop/api/mypage/profile", info, {
           headers: {
             "Authorization" : getCookieToken(),
         }
         })
-       navigate('/mypage')
+        window.location.reload()
        } else {
            alert('빈칸을 전부 채워주세요')
        }
