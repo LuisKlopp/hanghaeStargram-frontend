@@ -55,25 +55,26 @@ const StWrapper = styled.div`
   width: 470px;
   height: 100px;
   display: flex;
-  justify-content: space-evenly;
+  overflow: hidden;
   background-color: #ffffff;
-  align-items: center;
+  /* align-items: center; */
   border: 1px solid #d7d7d7;
   border-radius: 10px;
 `;
 
 const StStory = styled.div`
-  width:15%;
+  width:50px;
   height:100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left:25px;
 `
 
 const StProfile = styled.div`
-  width:85%;
-  height:60%;
+  width:55px;
+  height:55px;
   border-radius: 50px;
   cursor:pointer;
   background-image: url(${(props => props.a.profileImageUrl)});

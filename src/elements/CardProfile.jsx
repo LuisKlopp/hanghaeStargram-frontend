@@ -25,7 +25,7 @@ const CardProfile = ({stuff}) => {
 
 
     <>
-        <div style={{display:'flex', height:'50px', width:'100px'}}>
+        <div style={{display:'flex', height:'50px', width:'110px'}}>
         <StProfile user={stuff}>
         </StProfile>
         <StNameDiv>
@@ -41,7 +41,7 @@ export default CardProfile;
 
 
 const StProfile = styled.div`
-  width:50px;
+  width:80px;
   height:50px;
   border-radius: 50px;
   margin-left:10px;
@@ -52,7 +52,7 @@ const StProfile = styled.div`
 `
 
 const StNameDiv = styled.div`
-  width:30%;
+  width:50px;
   height:70%;
   margin-left:5px;
   display:flex;
