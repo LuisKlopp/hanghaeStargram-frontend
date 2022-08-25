@@ -23,16 +23,19 @@ export const getDetailComments = createAsyncThunk(
 export const addCommentList = createAsyncThunk(
   "comment/addComment",
   async (newList) => {
-    const response = await axios.post(`https://01192mg.shop/api/auth/comments/${newList.id}`, newList.content,
-      {
+    console.log(newList)
+    const response = await axios.post(`https://01192mg.shop/api/comments/${newList.id}`, newList,
+    {
         headers: {
             "Content-Type": `application/json`,
             "Authorization": getCookieToken(),
-            "refresh-token": getRefreshToken()
           }
   });
+  console.log(response.data)
   return response.data
   })
+
+
 
 export const editContent = createAsyncThunk("comment/editComment", async (payload) => {
   const response = await axios.put(`https://01192mg.shop/api/auth/comments/${payload.id}`, { content: payload.content },
@@ -46,12 +49,11 @@ export const editContent = createAsyncThunk("comment/editComment", async (payloa
     return { payload }
   })
 
-export const deleteContent = createAsyncThunk("commet/deleteComment", async (id) => {
-    const response = await axios.delete(`https://01192mg.shop/api/auth/comments/${id}`,{
+export const deleteContent = createAsyncThunk("comment/deleteComment", async (id) => {
+    const response = await axios.delete(`https://01192mg.shop/api/comments/${id}`,{
       headers: {
           "Content-Type": `application/json`,
           "Authorization": getCookieToken(),
-          "refresh-token": getRefreshToken()
         }
   });
     return id
@@ -70,9 +72,9 @@ export const commentSlice = createSlice({
     [getDetailComments.rejected]: (state, action) => {
       state.isLoading = false
     },
-    [addCommentList.fulfilled]: (state, action) => 
-    { state.comments.data.push(action.payload.data) },
-    
+    [addCommentList.fulfilled]: (state, action) => {
+      state.comments = [...state.comments, action.payload.data]
+    },
     [editContent.fulfilled]: (state, { payload }) => {
       state.comments.data = state.comments.data.map((comment) =>
       comment.id === payload.payload.id
@@ -81,6 +83,7 @@ export const commentSlice = createSlice({
       )
     },
     [deleteContent.fulfilled]: (state, { payload }) => { 
+      console.log(payload)
       state.comments.data = state.comments.data.filter((comment) => comment.id !==  payload)
     },
 

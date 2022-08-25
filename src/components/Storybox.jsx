@@ -11,7 +11,6 @@ const Storybox = () => {
   const get_members = async () => {
     const { data } = await axios.get("https://01192mg.shop/api/members");
     setMembers(data.data)
-    console.log(members)
   };
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const StWrapper = styled.div`
   width: 470px;
   height: 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: #ffffff;
   align-items: center;
   border: 1px solid #d7d7d7;
@@ -78,10 +77,11 @@ const StProfile = styled.div`
   border-radius: 50px;
   cursor:pointer;
   background-image: url(${(props => props.a.profileImageUrl)});
-  background-size : cover;
+  background-size : 100% 100%;
 
 `
 
 const StUsername = styled.span`
   font-size:15px;
+  font-weight:600;
 `

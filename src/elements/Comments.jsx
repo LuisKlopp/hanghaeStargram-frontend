@@ -4,38 +4,48 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { getCookieToken } from "../Cookie";
+import UseGetUser from "../hooks/UseGetUser";
+import { deleteContent } from "../redux/modules/commentSlice";
+import { Dispatch } from "react";
+import { useDispatch } from "react-redux";
 
-const Comments = ({comments, stuff, a}) => {
+const Comments = ({a, user}) => {
 
-  const deleteComment = async (id) => {
-    const response = await axios.delete(`https://01192mg.shop/api/comments/${id}`, {
+  const dispatch = useDispatch()
+ 
+
+  const deleteComment = (id) => {
+    const response = axios.delete(`https://01192mg.shop/api/comments/${id}`,{
       headers: {
-        "Authorization" : getCookieToken()
-      }
-    })
-    alert('삭제되었습니다')
-    window.location.reload()
+          "Content-Type": `application/json`,
+          "Authorization": getCookieToken(),
+        }
+  });
   }
 
 
 
 
+  let button;
+  if (user.username === a.author) {
+      button = <StDelete onClick={() => {
+        deleteComment(a.id)
+      }}>X</StDelete>
+  }
 
 
   return (
 
 
     <>
-        <div style={{display:'flex', height:'50px', width:'100%', wordBreak:'break-all'}}>
+        <div style={{display:'flex', height:'50px', width:'100%', wordBreak:'break-all', marginTop:'10px'}}>
         <StProfile a={a}>
         </StProfile>
         <StNameDiv>
           <StUserName style={{fontWeight:'600'}}>{a.author}</StUserName>
           <StUserName style={{paddingRight:'60px'}}>{a.content}</StUserName>
         </StNameDiv>
-        <StDelete onClick={() => {
-          deleteComment(a.id)
-        }}>X</StDelete>
+        {button}
         
         </div>
     </>
@@ -46,11 +56,11 @@ export default Comments;
 
 
 const StProfile = styled.div`
-  width:50px;
+  width:60px;
   height:50px;
   border-radius: 50px;
   margin-left:10px;
-  background-image: url(${(props => props.a.profileImg)});
+  background-image: url(${(props => props.a.profileImage)});
   background-size: 100% 100%;
   cursor:pointer;
 `
@@ -62,6 +72,7 @@ const StNameDiv = styled.div`
   display:flex;
   /* text-align: center; */
   flex-direction: column;
+  align-items: baseline;
 `
 
 const StUserName = styled.span`

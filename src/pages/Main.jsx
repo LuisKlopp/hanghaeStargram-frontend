@@ -12,28 +12,33 @@ import { getCookieToken } from "../Cookie";
 import UseCheckCookie from "../hooks/UseCheckCookie";
 import UseGetUser from "../hooks/UseGetUser";
 import { useNavigate } from "react-router-dom";
+import { getPost } from "../redux/modules/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Main = () => {
 
   const navigate = useNavigate()
-  const [ posts, setPosts ] = useState(null)
-
+  // const [ posts, setPosts ] = useState(null)
+  const dispatch = useDispatch()
 
   const cook = UseCheckCookie()
   const user = UseGetUser();
     
+  const { isLoading, error, posts, isFinish } = useSelector((state) => state.posts);
+  console.log(posts)
 
-  const get_posts = async () => {
-    const { data } = await axios.get("https://01192mg.shop/api/posts");
-    // console.log(data)
-    setPosts(data.data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-  };
+  // const get_posts = async () => {
+  //   const { data } = await axios.get("https://01192mg.shop/api/posts");
+  //   // console.log(data)
+  //   setPosts(data.data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
+  // };
 
   useEffect(() => {
-    get_posts()
+    dispatch(getPost())
   }, [])
 
-  if (posts === null) {
+  if (posts.data === undefined) {
     return (
       <StWrapper>
         <span style={{fontSize:'30px'}}>
@@ -52,8 +57,8 @@ const Main = () => {
         <StLeftdiv>
           <Storybox></Storybox>
           {
-            posts.map((stuff, i) => {
-             return  <InstaCard stuff={stuff} key={stuff.id} i={i} posts={posts}/>
+            posts.data.map((stuff, i) => {
+             return  <InstaCard stuff={stuff} key={stuff.id} user={user}/>
             })
           } 
         </StLeftdiv>
