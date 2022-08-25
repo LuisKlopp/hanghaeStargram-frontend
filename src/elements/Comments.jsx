@@ -15,14 +15,16 @@ const Comments = ({a, user}) => {
  
 
   const deleteComment = (id) => {
-    const response = axios.delete(`https://01192mg.shop/api/comments/${id}`,{
-      headers: {
-          "Content-Type": `application/json`,
-          "Authorization": getCookieToken(),
-        }
-  });
+  //   const response = axios.delete(`https://01192mg.shop/api/comments/${id}`,{
+  //     headers: {
+  //         "Content-Type": `application/json`,
+  //         "Authorization": getCookieToken(),
+  //       }
+  // });
+  dispatch(deleteContent(id))
   }
 
+  
 
 
 
