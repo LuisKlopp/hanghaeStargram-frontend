@@ -26,7 +26,6 @@ const Main = () => {
   const user = UseGetUser();
     
   const { isLoading, error, posts, isFinish } = useSelector((state) => state.posts);
-  console.log(posts)
 
   // const get_posts = async () => {
   //   const { data } = await axios.get("https://01192mg.shop/api/posts");

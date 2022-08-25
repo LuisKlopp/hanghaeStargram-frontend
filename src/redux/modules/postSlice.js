@@ -13,7 +13,6 @@ export const getPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get("https://01192mg.shop/api/posts");
-      console.log(data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

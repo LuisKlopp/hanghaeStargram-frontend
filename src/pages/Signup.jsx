@@ -107,7 +107,6 @@ export const Signup = () => {
     if (userInfo && isUsername && isNickname && isPassword ) {
       axios.post("https://01192mg.shop/api/members/signup", userInfo)
         .then((res) => {
-          console.log("회원가입정보 ", res.data)
           if(!res.data.success) {
             alert('아이디가 중복되었습니다!')
             window.location.reload()

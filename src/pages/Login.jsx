@@ -63,7 +63,6 @@ const Login = () => {
         alert("아이디 또는 비밀번호를 확인해주세요.")
         window.location.reload()
       } else{
-        console.log(res.headers.authorization)
         setAccessToken(res.headers.authorization);
         // setRefreshToken(res.headers['refresh-token'])
         navigate("/main")

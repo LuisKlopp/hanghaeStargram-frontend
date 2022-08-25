@@ -19,6 +19,14 @@ const Header = ({user}) => {
     }
   };
 
+  if(user === null) {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+
 
 
 

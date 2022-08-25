@@ -19,7 +19,6 @@ export const setAccessToken = (accessToken) => {
 export const setRefreshToken = (refreshtoken) => {
   const today = new Date();
   const expireDate = today.setDate(today.getDate() + 7);
-  console.log(refreshtoken)
 
   return cookies.set("fresh_token", refreshtoken, {
     sameSite: "strict",

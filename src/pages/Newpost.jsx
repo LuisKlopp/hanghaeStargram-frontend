@@ -36,14 +36,11 @@ const Newpost = () => {
         const reader = new FileReader();
     
         const file = selectFile.current.files[0];
-        console.log(file)
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           setImgUrl(reader.result);
-          console.log(reader.result)
         };
 
-        console.log(files)
 
       }
 

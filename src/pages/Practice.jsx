@@ -16,7 +16,6 @@ function Practice () {
         setFileList((prevState) => [...prevState, image]);
       }
 
-      console.log(files)
     };
   
     // 업로드시 호출될 함수
@@ -44,7 +43,6 @@ function Practice () {
       setUploading(false);
     };
 
-    console.log(photoURL)
  
     return (
         <div>

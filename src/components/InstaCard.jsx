@@ -15,7 +15,6 @@ const InstaCard = ({stuff, user}) => {
   const set_modal = () => {
     setModal(true)
     setTargetId(stuff.id)
-    console.log(stuff)
   }
 
 
