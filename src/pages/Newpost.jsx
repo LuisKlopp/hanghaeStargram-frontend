@@ -18,7 +18,6 @@ const Newpost = () => {
     const [file, setFile] = useState('');
     const [ imgurl, setImgUrl ] = useState('')
     const [loading, setUploading] = useState(null);
-    const [photoURL, setPhotosURL] = useState([]); 
     const [ content , setContent] = useState('')
     const [files, setFileList] = useState([]); 
     const [percent, setPercent] = useState(false);

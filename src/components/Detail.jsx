@@ -17,7 +17,6 @@ const Detail = ({setModal, stuff, user}) => {
   const  { data }= useSelector((state) => state.comments.comments)
 
 
-  const [ temp_comment, setTempComment ] = useState(null)
   const [comment, setComment] = useState("");
   let comments = stuff.comments
   const dispatch = useDispatch()
@@ -48,14 +47,6 @@ const Detail = ({setModal, stuff, user}) => {
     )
   }
 
-    
-  //   const response = await axios.post(`https://01192mg.shop/api/comments/${id}`, obj, {
-  //     headers: {
-  //       "Authorization" : getCookieToken()
-  //     }
-  //   })
-  //   window.location.reload()
-  // }
 
 
 

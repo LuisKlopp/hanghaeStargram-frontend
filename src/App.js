@@ -6,7 +6,6 @@ import Main from './pages/Main'
 import Signup from './pages/Signup';
 import Newpost from './pages/Newpost';
 import Header from './components/Header'
-import Practice from './pages/Practice';
 import Mypage from './pages/Mypage';
 import react, {useEffect} from 'react'
 import UseGetUser from './hooks/UseGetUser';
@@ -32,7 +31,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/newpost" element={<Newpost/>} />
         <Route path="/mypage" element={<Mypage/>}/>
-        <Route path="/practice" element={<Practice/>}/>
 
         </Routes>
     </> 

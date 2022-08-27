@@ -9,7 +9,6 @@ const CardProfile = ({stuff}) => {
 
   const user = UseGetUser()
 
-  const {pathname} = useLocation();
 
 
 

@@ -4,11 +4,10 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Routes, Route, Link, Redirect, useLocation } from 'react-router-dom'
 import UseGetUser from "../hooks/UseGetUser";
 
-const Profile = ({recommend}) => {
+const Profile = () => {
 
 
   const user = UseGetUser()
-  const {pathname} = useLocation();
 
 
 

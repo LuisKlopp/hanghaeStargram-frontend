@@ -52,16 +52,6 @@ const InstaCard = ({stuff, user}) => {
             </div>
           </FooterDiv2>
 
-{/* 
-          <div style={{display:'flex', height:'50px', width:'100px'}}>
-        <StProfile stuff={stuff}>
-        </StProfile>
-        <StNameDiv>
-          <StUserName>{stuff.author}</StUserName>
-          <StUserName style={{paddingRight:'60px', fontWeight:'500', width:'100px'}}>{stuff.authorNickname}</StUserName>
-        </StNameDiv>
-        </div> */}
-
 
         </CardFooter>
 

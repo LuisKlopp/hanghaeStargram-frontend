@@ -19,19 +19,12 @@ import { useDispatch, useSelector } from "react-redux";
 const Main = () => {
 
   const navigate = useNavigate()
-  // const [ posts, setPosts ] = useState(null)
   const dispatch = useDispatch()
 
-  const cook = UseCheckCookie()
   const user = UseGetUser();
     
   const { isLoading, error, posts, isFinish } = useSelector((state) => state.posts);
 
-  // const get_posts = async () => {
-  //   const { data } = await axios.get("https://01192mg.shop/api/posts");
-  //   // console.log(data)
-  //   setPosts(data.data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
-  // };
 
   useEffect(() => {
     dispatch(getPost())

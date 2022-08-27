@@ -83,9 +83,6 @@ const EditInfo = ({user, edit, setEdit}) => {
         profileImage : url[0],
       }
 
-      // if (nickname.length < 2 || nickname.length > 8) {
-      //   alert('3글자이상 7글자미만으로 입력해주세요')
-      // }
       
       if (nickname !== ''){
         await axios.put("https://01192mg.shop/api/mypage/profile", info, {
